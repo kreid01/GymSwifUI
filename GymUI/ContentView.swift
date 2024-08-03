@@ -1,56 +1,79 @@
 import SwiftUI
 
-struct URLImage: View {
-    
-    let urlString: String
-    @State var data: Data?
-    
-    var body: some View {
-        if let data = data, let uiimage = UIImage(data: data) {
-            Image(uiImage: uiimage)
-                .resizable()
-                .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-                .frame(width: 130)
-                .background(Color.gray)
-        }
-    else {
-        Image("video")
-            .resizable()
-            .aspectRatio(contentMode: /*@START_MENU_TOKEN@*/.fill/*@END_MENU_TOKEN@*/)
-            .frame(width: 130)
-            .background(Color.gray)
-    }
-    }
 
-    
-    private func fetchData() {
-        guard let url = URL(string : urlString) else {
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) {
-            data, _, _ in
-            self.data = data
-        }
-        
-        task.resume()
-    }
-}
 
-struct ContentView: View {
-    @StateObject var viewModel = ViewModel()
+struct SetView : View {
+    let selectedSet: Set
+    @StateObject var setViewModel = ViewModel<CardResponse>(uri:
+                                                                "https://api.pokemontcg.io/v2/cards")
+    
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(viewModel.Sets, id: \.self) {
-                    set in HStack {
-                        URLImage(urlString: set)
-                        
-                        Text(set.name).padding()
+                ForEach($setViewModel.data, id: \.self) {
+                    $card in
+                    HStack {
+                        if let image = card.images["large"] {
+                            URLImage(urlString: image)
+                        }
+                        Text(card.name).padding()
                     }
                 }
-            }.navigationTitle("Cards").padding()
+            }
+        }.navigationTitle(selectedSet.name).padding(.horizontal)
+                    .onAppear {
+                        setViewModel.fetch()
+                    
+        }
+    }
+}
+
+struct Card: Hashable,  Codable {
+    let  id: String
+    let name : String
+    let hp: String
+    let types: [String]
+    let images : [String: String]
+}
+
+struct TCGPlayer : Codable{
+    let url : String
+    let prices: String
+}
+
+struct PokemonImages: Codable {
+    let small : String
+    let large : String
+}
+
+struct Attack: Codable {
+    let name : String;
+    let cost : [String]
+    let damage : String
+    let convertedEnergyCost: Int;
+    let text: String
+
+}
+
+struct ContentView: View {
+    @StateObject var viewModel = ViewModel<SetResponse>(uri: "https://api.pokemontcg.io/v2/sets")
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach($viewModel.data, id: \.self) {
+                    $set in
+                    NavigationLink(destination: SetView(selectedSet: set)) {
+                        HStack {
+                            if let image = set.images["logo"] {
+                                URLImage(urlString: image)
+                            }
+                            Text(set.name).padding()
+                        }
+                    }
+                }
+            }.navigationTitle("Cards").padding(.horizontal)
                 .onAppear {
                     viewModel.fetch()
                 }

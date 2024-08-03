@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985C2C5D9D1900CB7B2A /* URLImage.swift */; };
 		85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* GymUIApp.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
@@ -32,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		850F985C2C5D9D1900CB7B2A /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* GymUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D306162C5AC966008CB1B6 /* GymUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymUIApp.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 				85D3061C2C5AC968008CB1B6 /* GymUI.entitlements */,
 				85D3061D2C5AC968008CB1B6 /* Preview Content */,
 				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
+				850F985C2C5D9D1900CB7B2A /* URLImage.swift */,
 			);
 			path = GymUI;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
 				85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */,
+				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

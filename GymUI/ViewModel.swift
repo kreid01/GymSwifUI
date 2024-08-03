@@ -7,46 +7,55 @@
 
 import SwiftUI
 
+protocol DataContainer: Decodable {
+    associatedtype DataType: Decodable & Hashable
+    var data: [DataType] { get set }
+}
+
+struct SetResponse: DataContainer ,Hashable  {
+    var data: [Set]
+}
+
+struct CardResponse: DataContainer, Hashable {
+    var data: [Card]
+}
+
 struct Set: Hashable, Codable{
     let id: String
     let name: String;
     let series: String;
     let printedTotal : Int;
     let releaseDate: String
+    let images: [String: String]
 }
 
-struct SetReturn: Codable {
-let data: [Set]
-}
-
-struct SetImage {
+struct SetImage: Codable {
     let symbol: String;
     let logo: String
 }
 
-class ViewModel: ObservableObject {
-    @Published var Sets: [Set] = []
+class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
+    @Published var data: [T.DataType] = []
+    var uri: String
+    init(uri: String) {
+        self.uri = uri;
+    }
     
     func fetch() {
-        guard let url = URL(string:
-           "https://api.pokemontcg.io/v2/sets") else {
+        guard let url = URL(string:uri) else {
             return
         }
         
-                            
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data,
-            _, error in
-            
-            guard let data = data, error == nil else {
-                return
-            }
-
+        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+                 guard let data = data, error == nil else {
+                     return
+                 }
             do {
-                let sets = try JSONDecoder().decode(SetReturn.self,
-                                                    from: data)
-                print(sets)
-                DispatchQueue.main.async {
-                    self?.Sets = sets.data
+                let decodedData = try JSONDecoder().decode(T.self, from: data)
+                               DispatchQueue.main.async {
+                                   self?.data = decodedData.data
+                                   
+                                   print(decodedData.data)
                 }
             }
             catch {
@@ -56,4 +65,10 @@ class ViewModel: ObservableObject {
         
         task.resume()
     }
+
+}
+
+
+struct SetViewModel {
+    
 }
