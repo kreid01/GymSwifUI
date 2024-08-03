@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct URLImage: View {
-    
+    let width: CGFloat
     let urlString: String
     @State var data: Data?
     
@@ -16,13 +16,13 @@ struct URLImage: View {
             Image(uiImage: uiimage)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 100)
+                .frame(width: width)
         }
         else {
-            Image("video")
+            Image("")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 100)
+                .frame(width: width)
                 .onAppear {
                     fetchData()
                 }
@@ -33,7 +33,6 @@ struct URLImage: View {
         guard let url = URL(string : urlString) else {
             return
         }
-        print(url)
 
         let task = URLSession.shared.dataTask(with: url) {
             data, _, _ in
