@@ -18,9 +18,7 @@ struct SearchCardView: View {
                     card in
                     NavigationLink(destination: CardView(card: card)) {
                         VStack {
-                            if let image = card.images?["large"] {
-                                URLImage(width: 100, urlString: image)
-                            }
+                            URLImage(width: 100, urlString: card.images.large)
                             Text(card.name).padding().font(.system(size: 12))
                         }.frame(height:200)
                     }

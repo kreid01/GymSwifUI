@@ -9,14 +9,41 @@ struct SetView : View {
         _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)"))
     }
     
+    
     var searchResults: [Card] {
         if searchText.isEmpty {
-            return setViewModel.data
+            return sortCards(cards: setViewModel.data)
         } else {
-            return setViewModel.data.filter { $0.name.contains(searchText)}
+            return sortCards(cards: setViewModel.data.filter { $0.name.contains(searchText)})
         }
     }
     
+    
+    func sortCards(cards: [Card]) -> [Card]  {
+        var newCards = cards;
+        if sort == 0 { return newCards}
+        newCards.sort {
+            if sort == 1 {
+                return  $0.name < $1.name
+            }
+            if sort == 2 {
+                return  $0.name > $1.name
+            }
+            if sort == 5 {
+                if let type1 = $0.types?[0], let type2 = $1.types?[0] {
+                    return type1 < type2
+                }
+            }
+            else {
+                if let type1 = $0.types?[0], let type2 = $1.types?[0] {
+                    return type1 > type2
+                }
+            }
+            
+            return true
+        }
+        return newCards
+    }
     
     let layout = [
         GridItem(.fixed(110)),
@@ -25,31 +52,29 @@ struct SetView : View {
     ]
     
     @State var sort: Int = 0
+    private var sortOptions: [String] = ["None", "Name (Ascending)", "Name (Descending)", "Type (Ascending)", "Type (Descending)"]
     
     var body: some View {
         NavigationStack {
             Menu {
                 Picker(selection: $sort, label: Text("Sorting options")) {
-                    Text("Name").tag(0)
-                    Text("Priority").tag(1)
+                    ForEach(Array(sortOptions.enumerated()), id: \.1) { index, item in
+                            Text(item).tag(index)
+                        }
                 }
             } label: {
                 Button(action: { print(sort)}) {
                     Text("Sort by")
-                    Text(sort == 0 ? "Name" : "Priority")
+                    Text(sortOptions[sort])
                     Image(systemName: "arrow.up.arrow.down")
                 }
-            }.onChange(of: sort) {
-                print(sort)
             }
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(searchResults, id: \.self) {
                     card in
                     NavigationLink(destination: CardView(card: card)) {
                         VStack {
-                            if let image = card.images?["large"] {
-                                URLImage(width: 100, urlString: image)
-                            }
+                            URLImage(width: 100, urlString: card.images.large)
                             Text(card.name).padding().font(.system(size: 12))
                         }.frame(height:200)
                     }

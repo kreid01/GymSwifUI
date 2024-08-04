@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct CardView: View {
-    var selectedCard: Card
+    var card: Card
     @StateObject var cardViewModel: CardViewModel
     
     init(card:Card) {
-        self.selectedCard = card;
+        self.card = card;
         _cardViewModel = StateObject(wrappedValue: CardViewModel(uri: "https://api.pokemontcg.io/v2/cards/\(card.id)"))
     }
     
@@ -16,7 +16,7 @@ struct CardView: View {
                     URLImage(width: 350,urlString: image )
                 }
                 
-                if let prices = cardViewModel.selectedCard?.tcgplayer?.prices {
+                if let prices = cardViewModel.selectedCard?.tcgplayer.prices {
                     if let normal = prices.normal {
                         Text("Normal high: " + String(normal.high))
                         Text("Normal mid:" + String(normal.mid))
@@ -31,7 +31,7 @@ struct CardView: View {
                     }
                 }
             }
-        }.navigationTitle(selectedCard.name).onAppear {
+        }.navigationTitle(card.name).onAppear {
             cardViewModel.fetch()
         }
     }

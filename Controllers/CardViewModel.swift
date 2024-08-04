@@ -1,7 +1,7 @@
 import SwiftUI
 
 class CardViewModel: ObservableObject{
-    @Published var selectedCard: SelectedCard?
+    @Published var selectedCard: Card?
     var uri: String
     init(uri: String) {
         self.uri = uri;
