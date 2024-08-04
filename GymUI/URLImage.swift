@@ -1,9 +1,3 @@
-//
-//  URLImage.swift
-//  GymUI
-//
-//  Created by Kieran Reid on 03/08/2024.
-//
 import SwiftUI
 
 struct URLImage: View {

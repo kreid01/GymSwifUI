@@ -9,6 +9,12 @@
 /* Begin PBXBuildFile section */
 		850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985C2C5D9D1900CB7B2A /* URLImage.swift */; };
 		850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985E2C5DB15900CB7B2A /* SetView.swift */; };
+		8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384A2C5FA07E009E26A4 /* CardModels.swift */; };
+		8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384C2C5FA0A5009E26A4 /* SetModels.swift */; };
+		855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238502C5FA155009E26A4 /* CardViewModel.swift */; };
+		855238532C5FA177009E26A4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238522C5FA177009E26A4 /* CardView.swift */; };
+		855238592C5FA620009E26A4 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238582C5FA620009E26A4 /* SetsView.swift */; };
+		8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385A2C5FB04F009E26A4 /* SearchCardView.swift */; };
 		85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* GymUIApp.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
@@ -36,6 +42,12 @@
 /* Begin PBXFileReference section */
 		850F985C2C5D9D1900CB7B2A /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		850F985E2C5DB15900CB7B2A /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		8552384A2C5FA07E009E26A4 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
+		8552384C2C5FA0A5009E26A4 /* SetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModels.swift; sourceTree = "<group>"; };
+		855238502C5FA155009E26A4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		855238522C5FA177009E26A4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		855238582C5FA620009E26A4 /* SetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
+		8552385A2C5FB04F009E26A4 /* SearchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardView.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* GymUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D306162C5AC966008CB1B6 /* GymUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymUIApp.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,9 +84,41 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		855238492C5FA064009E26A4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8552384C2C5FA0A5009E26A4 /* SetModels.swift */,
+				8552384A2C5FA07E009E26A4 /* CardModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8552384E2C5FA12E009E26A4 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
+				855238502C5FA155009E26A4 /* CardViewModel.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		8552384F2C5FA134009E26A4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				850F985E2C5DB15900CB7B2A /* SetView.swift */,
+				855238582C5FA620009E26A4 /* SetsView.swift */,
+				855238522C5FA177009E26A4 /* CardView.swift */,
+				8552385A2C5FB04F009E26A4 /* SearchCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		85D3060A2C5AC966008CB1B6 = {
 			isa = PBXGroup;
 			children = (
+				8552384F2C5FA134009E26A4 /* Views */,
+				8552384E2C5FA12E009E26A4 /* Controllers */,
+				855238492C5FA064009E26A4 /* Models */,
 				85D306152C5AC966008CB1B6 /* GymUI */,
 				85D306142C5AC966008CB1B6 /* Products */,
 			);
@@ -93,14 +137,12 @@
 		85D306152C5AC966008CB1B6 /* GymUI */ = {
 			isa = PBXGroup;
 			children = (
+				850F985C2C5D9D1900CB7B2A /* URLImage.swift */,
 				85D306162C5AC966008CB1B6 /* GymUIApp.swift */,
 				85D306182C5AC966008CB1B6 /* ContentView.swift */,
 				85D3061A2C5AC968008CB1B6 /* Assets.xcassets */,
 				85D3061C2C5AC968008CB1B6 /* GymUI.entitlements */,
 				85D3061D2C5AC968008CB1B6 /* Preview Content */,
-				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
-				850F985C2C5D9D1900CB7B2A /* URLImage.swift */,
-				850F985E2C5DB15900CB7B2A /* SetView.swift */,
 			);
 			path = GymUI;
 			sourceTree = "<group>";
@@ -244,7 +286,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */,
+				855238592C5FA620009E26A4 /* SetsView.swift in Sources */,
+				855238532C5FA177009E26A4 /* CardView.swift in Sources */,
+				8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */,
+				8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */,
+				8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
+				855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */,
 				85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
 				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,

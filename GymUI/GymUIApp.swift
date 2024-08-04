@@ -1,9 +1,3 @@
-//
-//  GymUIApp.swift
-//  GymUI
-//
-//  Created by Kieran Reid on 31/07/2024.
-//
 
 import SwiftUI
 
