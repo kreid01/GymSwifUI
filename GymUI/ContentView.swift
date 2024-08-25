@@ -1,20 +1,27 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    
     var body: some View {
-        NavigationStack {
-            List {
-                NavigationLink(destination: SetsView()) {
-                    Text("Sets")
-                }
-                NavigationLink(destination: SearchCardView()) {
-                    Text("Search Cards")
-                }
+            TabView{
+                SetsView()
+                             .tabItem {
+                                 Label("Sets", systemImage: "house")
+                             }
+                SearchCardView()
+                             .tabItem {
+                                 Label("Search", systemImage: "magnifyingglass")
+                             }
+                CollectionView()
+                             .tabItem {
+                                 Label("Collection", systemImage: "list.dash")
+                             }
+                WishlistView()
+                             .tabItem {
+                                 Label("Wishlist", systemImage: "list.star")
+                             }
             }
-            .navigationTitle("Home")
         }
-    }
 }
 
 

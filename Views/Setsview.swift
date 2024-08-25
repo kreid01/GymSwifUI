@@ -60,13 +60,22 @@ struct SetsView : View {
                             }
                             Text(set.name).padding()
                         }
-                    }
-                    
+                    }    
                 }
             }.navigationTitle("Sets").searchable(text: $searchText)
                 .onAppear {
-                    viewModel.fetch()
+                    var setsCache = Cache.getSets()
+                    if(setsCache.Sets == []) {
+                        print("hit")
+                        viewModel.fetch()
+                    } else {
+                        
+                    }
                 }
         }
     }
+}
+
+#Preview {
+    ContentView()
 }

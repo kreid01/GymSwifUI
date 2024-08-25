@@ -1,3 +1,4 @@
+import Foundation
 protocol DataContainer: Decodable {
     associatedtype DataType: Decodable & Hashable
     var data: [DataType] { get }
@@ -9,6 +10,15 @@ struct SetResponse: DataContainer ,Hashable  {
 
 struct CardResponse: DataContainer, Hashable {
     var data: [Card]
+}
+
+ struct PokemonResponse: Decodable, Hashable {
+    var results: [Pokemon]
+}
+
+public struct Pokemon : Hashable, Codable {
+    let url: String
+    let name: String;
 }
 
 struct Set: Hashable, Codable {

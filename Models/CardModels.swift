@@ -1,8 +1,11 @@
+import SwiftUI
+import UniformTypeIdentifiers
+
 struct SelectedCardResponse : Codable {
     let data: Card
 }
 
-struct Card: Codable, Hashable {
+struct Card: Codable, Hashable, Transferable {
     let  id: String
     let name : String
     let hp: String?
@@ -10,7 +13,14 @@ struct Card: Codable, Hashable {
     let images: PokemonImages
     let attacks: [Attack]?
     let number: String
-    let tcgplayer: TCGPlayer
+    
+    static var transferRepresentation: some TransferRepresentation {
+        CodableRepresentation(contentType: .card)
+    }
+}
+
+extension UTType  {
+    static let card = UTType(exportedAs: "Swift1.GymUI.card")
 }
 
 struct TCGPlayer : Codable, Hashable {

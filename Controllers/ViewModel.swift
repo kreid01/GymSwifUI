@@ -12,7 +12,10 @@ class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
             return
         }
         
-        let task = URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+        var request = URLRequest(url: url)
+        request.setValue("X-Api-Key", forHTTPHeaderField: "ba775f42-3e3c-4fe2-84ee-def10fa44232")
+        
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
                  guard let data = data, error == nil else {
                      return
                  }

@@ -9,7 +9,6 @@ struct SetView : View {
         _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)"))
     }
     
-    
     var searchResults: [Card] {
         if searchText.isEmpty {
             return sortCards(cards: setViewModel.data)
@@ -17,7 +16,6 @@ struct SetView : View {
             return sortCards(cards: setViewModel.data.filter { $0.name.contains(searchText)})
         }
     }
-    
     
     func sortCards(cards: [Card]) -> [Card]  {
         var newCards = cards;
