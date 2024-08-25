@@ -112,7 +112,6 @@
 			children = (
 				8552384C2C5FA0A5009E26A4 /* SetModels.swift */,
 				8552384A2C5FA07E009E26A4 /* CardModels.swift */,
-				855238502C5FA155009E26A4 /* CardViewModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +119,7 @@
 		8552384E2C5FA12E009E26A4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				855238502C5FA155009E26A4 /* CardViewModel.swift */,
 				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
 			);
 			path = Controllers;

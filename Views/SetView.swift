@@ -1,12 +1,14 @@
 import SwiftUI
 
+
+
 struct SetView : View {
     let selectedSet: Set
     @State private var searchText = "";
     @StateObject var setViewModel: ViewModel<CardResponse>
     init(set:Set) {
         selectedSet = set
-        _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)"))
+        _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)", saveHandler: Cache.saveCards, getHandler: Cache.getCards))
     }
     
     var searchResults: [Card] {

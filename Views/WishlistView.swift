@@ -59,7 +59,6 @@ public struct TrashView : View {
     var handler: (Card) -> Void
     @State public var inProgress: Bool;
     
-    
     public var body: some View {
         VStack {
             Spacer()

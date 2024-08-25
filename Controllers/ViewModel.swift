@@ -3,36 +3,50 @@ import SwiftUI
 class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
     @Published var data: [T.DataType] = []
     var uri: String
-    init(uri: String) {
+    let saveHandler: ([T.DataType]) -> Void?
+    let getHandler: () -> [T.DataType]
+    
+    init(uri: String, saveHandler: @escaping ([T.DataType]) -> Void, getHandler: @escaping () -> [T.DataType]) {
         self.uri = uri;
+        self.saveHandler = saveHandler
+        self.getHandler = getHandler
     }
     
     func fetch() {
-        guard let url = URL(string:uri) else {
-            return
-        }
+        print("hit handler")
+        let cachedData = getHandler()
+        print("sucess")
+
         
-        var request = URLRequest(url: url)
-        request.setValue("X-Api-Key", forHTTPHeaderField: "ba775f42-3e3c-4fe2-84ee-def10fa44232")
-        
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
-                 guard let data = data, error == nil else {
-                     return
-                 }
-            do {
-                let decodedData = try JSONDecoder().decode(T.self, from: data)
-                               DispatchQueue.main.async {
-                                   self?.data = decodedData.data
+        if cachedData == [] {
+            guard let url = URL(string:uri) else {
+                return
+            }
+            
+            var request = URLRequest(url: url)
+            request.setValue("X-Api-Key", forHTTPHeaderField: "ba775f42-3e3c-4fe2-84ee-def10fa44232")
+            
+            let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
+                     guard let data = data, error == nil else {
+                         return
+                     }
+                do {
+                    let decodedData = try JSONDecoder().decode(T.self, from: data)
+                                   DispatchQueue.main.async {
+                                       self?.data = decodedData.data
+                                       self?.saveHandler(decodedData.data)
+                    }
+                }
+                catch {
+                    print(error)
                 }
             }
-            catch {
-                print(error)
-            }
+            
+            task.resume()
+        } else {
+            self.data = cachedData;
         }
-        
-        task.resume()
-    }
-
+        }
 }
 
 
