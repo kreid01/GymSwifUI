@@ -5,6 +5,7 @@ import SwiftUI
 struct SetView : View {
     let selectedSet: Set
     @State private var searchText = "";
+    @State private var selectedCard: Card?
     @StateObject var setViewModel: ViewModel<CardResponse>
     init(set:Set) {
         selectedSet = set
@@ -19,6 +20,12 @@ struct SetView : View {
         }
     }
     
+    @State private var hideNavigationBar = false
+       func selectCard(card: Card?) {
+        self.selectedCard = card
+        hideNavigationBar = card != nil;
+    }
+
     func sortCards(cards: [Card]) -> [Card]  {
         var newCards = cards;
         if sort == 0 { return newCards}
@@ -56,29 +63,33 @@ struct SetView : View {
     
     var body: some View {
         NavigationStack {
-            Menu {
-                Picker(selection: $sort, label: Text("Sorting options")) {
-                    ForEach(Array(sortOptions.enumerated()), id: \.1) { index, item in
-                            Text(item).tag(index)
-                        }
-                }
-            } label: {
-                Button(action: { print(sort)}) {
-                    Text("Sort by")
-                    Text(sortOptions[sort])
-                    Image(systemName: "arrow.up.arrow.down")
+            if !hideNavigationBar {
+                Menu {
+                    Picker(selection: $sort, label: Text("Sorting options")) {
+                        ForEach(Array(sortOptions.enumerated()), id: \.1) { index, item in
+                                Text(item).tag(index)
+                            }
+                    }
+                } label: {
+                    Button(action: { print(sort)}) {
+                        Text("Sort by")
+                        Text(sortOptions[sort])
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
                 }
             }
             if setViewModel.data == [] {Spacer(minLength: 20)
                 ProgressView().controlSize(.large)
             }
             ScrollView {
-                LazyVGrid(columns:layout) { ForEach(searchResults, id: \.self) {
-                    card in SingleCard(card: card)
-            }
-        }
-    }
+                LazyVGrid(columns:layout) { ForEach(
+                    selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
+                    card in SingleCard(card: card, handler: selectCard)
+                    }
+                }
+    }.scrollDisabled(hideNavigationBar)
             .navigationBarTitle(selectedSet.name, displayMode: .inline)
+            .navigationBarHidden(hideNavigationBar)
             .searchable(text: $searchText)
                 .onAppear {
                     setViewModel.fetch()

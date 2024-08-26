@@ -21,22 +21,31 @@ public struct WishlistView: View {
 
     @State private var inProgress = false
     @State private var isDragging = false;
+    
+    @State private var selectedCard: Card?
+    
+    @State private var hideNavigationBar = false
+       func selectCard(card: Card?) {
+           selectedCard =  card
+        hideNavigationBar = selectedCard != nil;
+    }
 
     public var body: some View {
         NavigationView {
             ZStack {
                 ScrollView {
                     LazyVGrid(columns: layout) {
-                        ForEach(data, id: \.self) { card in
-                            SingleCard(card: card)
-                                .frame(height: 200)
+                        ForEach(
+                            selectedCard != nil ? [selectedCard!] : data, id: \.self) { card in
+                            SingleCard(card: card, handler: selectCard)
                                 .draggable(card)
                         }
                     }
-                }
-                .navigationTitle("Wishlist")
+                }.scrollDisabled(hideNavigationBar)
+                .navigationBarTitle("Wishlist", displayMode: .inline)
+                .navigationBarHidden(hideNavigationBar)
 
-                if isDragging == false {TrashView(handler: removeFromWishlist(card:), inProgress: inProgress)}
+                if !hideNavigationBar {TrashView(handler: removeFromWishlist(card:), inProgress: inProgress)}
             }
         }.refreshable {
             refresh()
@@ -62,10 +71,11 @@ public struct TrashView : View {
                     inProgress = isTargeted
                 }
                 .foregroundColor(.red)
-                .font(.system(size: 24))
+                .font(.system(size: 28))
                 .padding()
                 .background(inProgress ? Color.red.opacity(0.5) : .red.opacity(0.3))
                 .cornerRadius(5)
+                .offset(x: 0, y: -50)
         }
     }
 }

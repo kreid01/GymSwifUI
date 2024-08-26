@@ -3,7 +3,7 @@ import SwiftUI
 struct SetsView : View {
     @StateObject var viewModel = ViewModel<SetResponse>(uri: "https://api.pokemontcg.io/v2/sets", saveHandler: Cache.save, cachedData: Cache.getSets())
     @State private var searchText = "";
-    
+
     var searchResults: [Set] {
         if searchText.isEmpty {
             return sortSets(sets: viewModel.data)
@@ -62,10 +62,12 @@ struct SetsView : View {
                         }
                     }    
                 }
-            }.navigationTitle("").searchable(text: $searchText)
+            }.scrollContentBackground(.hidden)
+            .background(.white.opacity(0))
+            .navigationTitle("")
+            .searchable(text: $searchText)
                 .onAppear {
                         viewModel.fetch()
-
                 }
         }
     }

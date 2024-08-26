@@ -13,15 +13,27 @@ struct SearchCardView: View {
         GridItem(.fixed(110))
     ]
     
+    @State private var selectedCard: Card?
+    
+    @State private var hideNavigationBar = false
+       func selectCard(card: Card?) {
+           selectedCard = card;
+        hideNavigationBar = card != nil;
+    }
+    
     var body: some View {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns:layout) { ForEach(searchResults, id: \.self) {
+                LazyVGrid(columns:layout) { ForEach(
+                    selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
                     card in
-                        SingleCard(card: card)
+                    SingleCard(card: card, handler: selectCard)
                     }
                 }
-            }.navigationTitle("").searchable(text: $searchText).onChange(of: searchText) {
+            }.scrollDisabled(hideNavigationBar)
+            .navigationTitle("")
+                .searchable(text: $searchText)
+                .onChange(of: searchText) {
                 search()
             }.searchSuggestions{
                 ForEach(filteredSuggestions, id: \.name) { suggestion in

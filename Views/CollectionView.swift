@@ -28,6 +28,14 @@ public struct CollectionView : View {
     @State private var inProgress = false
     @State private var isDragging = false;
     @State private var viewingTotals = false;
+    
+    @State private var selectedCard: Card?
+    
+    @State private var hideNavigationBar = false
+       func selectCard(card: Card?) {
+           selectedCard = card;
+        hideNavigationBar = card != nil;
+    }
 
     public var body :  some View {
         NavigationView {
@@ -37,36 +45,54 @@ public struct CollectionView : View {
                         {
                             PriceRangeGrid(priceRanges: estimatedTotals)
                           .zIndex(1.0)
+                            
+                            Button("Hide") {
+                            viewingTotals = !viewingTotals
+                            }.frame(width: 350, height: 40)
+                            .background(.yellow)
+                            .foregroundColor(.black)
+                            .cornerRadius(5)
+                            .zIndex(2.0)
+                            .offset(x: 0, y: -340)
                         }
                     }
-                    ScrollView {
-                        LazyVGrid(columns:layout) { ForEach(data, id: \.self) {
-                            card in
-                            VStack {
-                                SingleCard(card: card)
-                                    .frame(height:200)
-                                    .draggable(card)
+                    
+                    VStack {
+                        if !hideNavigationBar && !viewingTotals {
+                            Button("Show Value") {
+                            viewingTotals = !viewingTotals
+                            }.frame(width: 350, height: 40)
+                            .background(.yellow)
+                            .foregroundColor(.black)
+                            .cornerRadius(5)
+                            .zIndex(2.0)
+                        }
+
+                        if !viewingTotals {
+                            ScrollView {
+                                LazyVGrid(columns:layout) { ForEach(
+                                    selectedCard != nil ? [selectedCard!] : data, id: \.self) {
+                                    card in
+                                    SingleCard(card: card, handler: selectCard)
+                                        .draggable(card)
                                 }
                             }
+                            }.offset(x: 0, y: 20)
+                                .scrollDisabled(hideNavigationBar)
                         }
-                    }
-                    .navigationBarTitle("Collection", displayMode: .inline)
-                        if isDragging == true {TrashView(handler: removeFromCollection(card:), inProgress: inProgress)}
+                }.navigationBarTitle("Collection", displayMode: .inline)
+                .navigationBarHidden(hideNavigationBar)
 
+
+                    if !hideNavigationBar {TrashView(handler: removeFromCollection(card:), inProgress: inProgress)}
                     }
-                }.refreshable {
+               
+            }.refreshable {
                     refresh()
                 }.onAppear(perform: {
                     refresh();
                 })
-            Button(viewingTotals ? "Hide" : "Show Value") {
-                viewingTotals = !viewingTotals
-            }.frame(width: 350, height: 40)
-                .background(.yellow)
-                .foregroundColor(.black)
-                .cornerRadius(5)
-            
-          
+
     }
 }
 

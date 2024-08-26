@@ -34,6 +34,8 @@ struct PriceRangeGrid : View {
                     }
                 }
             }
-        }
+        }.scrollContentBackground(.hidden)
+            .background(.white.opacity(0))
     }
+
 }

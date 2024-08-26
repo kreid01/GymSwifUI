@@ -12,7 +12,6 @@
 		8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384A2C5FA07E009E26A4 /* CardModels.swift */; };
 		8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384C2C5FA0A5009E26A4 /* SetModels.swift */; };
 		855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238502C5FA155009E26A4 /* CardViewModel.swift */; };
-		855238532C5FA177009E26A4 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238522C5FA177009E26A4 /* CardView.swift */; };
 		855238592C5FA620009E26A4 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238582C5FA620009E26A4 /* SetsView.swift */; };
 		8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385A2C5FB04F009E26A4 /* SearchCardView.swift */; };
 		8552385E2C6E75CC009E26A4 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385D2C6E75CC009E26A4 /* WishlistRepository.swift */; };
@@ -43,7 +42,6 @@
 		8552384A2C5FA07E009E26A4 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
 		8552384C2C5FA0A5009E26A4 /* SetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModels.swift; sourceTree = "<group>"; };
 		855238502C5FA155009E26A4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
-		855238522C5FA177009E26A4 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		855238582C5FA620009E26A4 /* SetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		8552385A2C5FB04F009E26A4 /* SearchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardView.swift; sourceTree = "<group>"; };
 		8552385D2C6E75CC009E26A4 /* WishlistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
@@ -106,7 +104,6 @@
 			children = (
 				850F985E2C5DB15900CB7B2A /* SetView.swift */,
 				855238582C5FA620009E26A4 /* SetsView.swift */,
-				855238522C5FA177009E26A4 /* CardView.swift */,
 				8552385A2C5FB04F009E26A4 /* SearchCardView.swift */,
 				8552385F2C6E761A009E26A4 /* WishlistView.swift */,
 				855238672C71181F009E26A4 /* CollectionView.swift */,
@@ -299,7 +296,6 @@
 				855238772C7B52C0009E26A4 /* Cache.swift in Sources */,
 				855238592C5FA620009E26A4 /* SetsView.swift in Sources */,
 				8552385E2C6E75CC009E26A4 /* WishlistRepository.swift in Sources */,
-				855238532C5FA177009E26A4 /* CardView.swift in Sources */,
 				855238682C71181F009E26A4 /* CollectionView.swift in Sources */,
 				855238972C7CA331009E26A4 /* PriceRangeGrid.swift in Sources */,
 				8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */,
