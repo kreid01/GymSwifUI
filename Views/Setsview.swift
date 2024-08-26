@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SetsView : View {
-    @StateObject var viewModel = ViewModel<SetResponse>(uri: "https://api.pokemontcg.io/v2/sets", saveHandler: Cache.save, getHandler: Cache.getSets)
+    @StateObject var viewModel = ViewModel<SetResponse>(uri: "https://api.pokemontcg.io/v2/sets", saveHandler: Cache.save, cachedData: Cache.getSets())
     @State private var searchText = "";
     
     var searchResults: [Set] {
@@ -58,11 +58,11 @@ struct SetsView : View {
                             if let image = set.images["logo"] {
                                 URLImage(width: 100, urlString: image)
                             }
-                            Text(set.name).padding()
+                            Text(set.name).font(.custom("VT323", size: 24)).padding()
                         }
                     }    
                 }
-            }.navigationTitle("Sets").searchable(text: $searchText)
+            }.navigationTitle("").searchable(text: $searchText)
                 .onAppear {
                         viewModel.fetch()
 

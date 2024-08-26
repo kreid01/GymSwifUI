@@ -16,8 +16,24 @@ struct Storage {
         let collection: Data
     }
     
-    static func save(wishlist: [Card], collection: [Card]) {
+    static func saveWishlist(wishlist: [Card]) {
         do {
+            let collection = getCollection()
+            
+            let encoder = JSONEncoder()
+            let wishlisData = try encoder.encode(wishlist)
+            let collectionData = try encoder.encode(collection)
+            UserDefaults.standard.set([wishlistKey: wishlisData, collectionKey: collectionData], forKey: userSessionKey)
+        }
+        catch {
+            print("Error")
+        }
+    }
+    
+    static func saveCollection(collection: [Card]) {
+        do {
+            let wishlist = getWishlist();
+            
             let encoder = JSONEncoder()
             let wishlisData = try encoder.encode(wishlist)
             let collectionData = try encoder.encode(collection)

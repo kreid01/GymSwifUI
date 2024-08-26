@@ -8,7 +8,7 @@ struct SetView : View {
     @StateObject var setViewModel: ViewModel<CardResponse>
     init(set:Set) {
         selectedSet = set
-        _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)", saveHandler: Cache.saveCards, getHandler: Cache.getCards))
+        _setViewModel = StateObject(wrappedValue: ViewModel<CardResponse>(uri: "https://api.pokemontcg.io/v2/cards/?q=set.id:\(set.id)", saveHandler: Cache.saveCards, cachedData: Cache.getSetCards(setId: set.id)))
     }
     
     var searchResults: [Card] {
@@ -69,25 +69,24 @@ struct SetView : View {
                     Image(systemName: "arrow.up.arrow.down")
                 }
             }
+            if setViewModel.data == [] {Spacer(minLength: 20)
+                ProgressView().controlSize(.large)
+            }
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(searchResults, id: \.self) {
-                    card in
-                    NavigationLink(destination: CardView(card: card)) {
-                        VStack {
-                            URLImage(width: 100, urlString: card.images.large)
-                            Text(card.name).padding().font(.system(size: 12))
-                        }.frame(height:200)
-                    }
+                    card in SingleCard(card: card)
             }
         }
     }
-            .navigationTitle(selectedSet.name).searchable(text: $searchText)
+            .navigationBarTitle(selectedSet.name, displayMode: .inline)
+            .searchable(text: $searchText)
                 .onAppear {
                     setViewModel.fetch()
             }
         }
     }
 }
+
 
 #Preview {
     ContentView()

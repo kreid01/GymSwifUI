@@ -1,54 +1,70 @@
 import SwiftUI
 
+
 struct CardView: View {
     var card: Card
     var wishlistRepository = WishlistRepository()
     var collectionRepository = CollectionRepository()
-    @StateObject var cardViewModel: CardViewModel
     
+    @State private var showPrices = false
+    @State private var prices: [PriceRangeDTO]?
+
     init(card:Card) {
         self.card = card;
-        _cardViewModel = StateObject(wrappedValue: CardViewModel(uri: "https://api.pokemontcg.io/v2/cards/\(card.id)"))
     }
     
+    private func updatePrices() {
+            if let tcgPrices = card.tcgplayer?.prices {
+               prices =  [PriceRangeDTO(priceRange: tcgPrices.normal, priceName: "Normal"),
+                          PriceRangeDTO(priceRange: tcgPrices.holofoil, priceName: "Holofoil"),
+                          PriceRangeDTO(priceRange: tcgPrices.reverseHolofoil, priceName: "Reverse Holo")]
+            }
+    }
     
         var body: some View {
             NavigationView {
                 VStack {
-                    if let selectedCard = cardViewModel.selectedCard {
-                        Text(selectedCard.name)
-                        URLImage(width: 350, urlString:selectedCard.images.large)
-
-                       // if let prices = selectedCard.tcgplayer?.prices {
-                         //   if let normal = prices.normal {
-                           //     Text("Normal high: \(normal.high)")
-                             //   Text("Normal mid: \(normal.mid)")
-              //                  Text("Normal low: \(normal.low)")
-                   //         }
-//
-                    //        if let holo = prices.holofoil {
-                    //            Text("Holo high: \(holo.high)")
-                    //            Text("Holo mid: \(holo.mid)")
-                    //            Text("Holo low: \(holo.low)")
-                    //        }
-                      //  }
-
-                        Button("Add to wishlist") {
-                            wishlistRepository.AddToWishlist(card: selectedCard)
+                    URLImage(width: 320, urlString:card.images.large)
+                        .opacity(showPrices ? 0.3 : 1)
+                        .offset(x: 0, y: -30)
+                        .onTapGesture {
+                            showPrices = !showPrices;
+                        }.overlay(content: {
+                            if showPrices {
+                                if let prices = prices {
+                                    PriceRangeGrid(priceRanges: prices)
+                                    .offset(x: 0, y: -30)
+                                    .onTapGesture {
+                                        showPrices = !showPrices;
+                                    }
+                                    .frame(width: 400)
+                                    .padding()
+                                }
                         }
-                        Button("Add to collection") {
-                            collectionRepository.AddToCollection(card: selectedCard)
-                        }
+                    })
 
-                    } else {
-                        ProgressView("Loading...")
-                    }
+                    Button("Add to wishlist") {
+                        wishlistRepository.AddToWishlist(card: card)
+                    }.frame(width: 350, height: 40)
+                        .background(.yellow)
+                        .foregroundColor(.black)
+                        .cornerRadius(5)
+                    Button("Add to collection") {
+                        collectionRepository.AddToCollection(card: card)
+                    }.frame(width: 350, height: 40)
+                        .background(.yellow)
+                        .foregroundColor(.black)
+                        .cornerRadius(5)
+                    Link("Buy", destination: URL(string: "https://magicmadhouse.co.uk/search.php?search_query=\(card.name)&productFilter=pokémon_set \(card.set.name)")!)
+                        .frame(width: 350, height: 40)
+                        .background(.yellow)
+                        .foregroundColor(.black)
+                        .cornerRadius(5)
                 }
-                .navigationTitle("")
-                .onAppear {
-                    cardViewModel.fetch()
+            }.navigationBarTitle(card.name, displayMode: .inline)
+                .onAppear{
+                    updatePrices()
                 }
-            }
         }
     }
 

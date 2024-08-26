@@ -4,20 +4,15 @@ class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
     @Published var data: [T.DataType] = []
     var uri: String
     let saveHandler: ([T.DataType]) -> Void?
-    let getHandler: () -> [T.DataType]
+    var cachedData : [T.DataType] = []
     
-    init(uri: String, saveHandler: @escaping ([T.DataType]) -> Void, getHandler: @escaping () -> [T.DataType]) {
+    init(uri: String, saveHandler: @escaping ([T.DataType]) -> Void, cachedData: [T.DataType]) {
         self.uri = uri;
         self.saveHandler = saveHandler
-        self.getHandler = getHandler
+        self.cachedData = cachedData;
     }
     
     func fetch() {
-        print("hit handler")
-        let cachedData = getHandler()
-        print("sucess")
-
-        
         if cachedData == [] {
             guard let url = URL(string:uri) else {
                 return

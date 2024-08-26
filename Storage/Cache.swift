@@ -18,9 +18,14 @@ struct Cache {
     
     static func saveCards(cards: [Card]) {
         do {
+            var cachedCards = getCards()
+            let cachedSets = getSets()
             let encoder = JSONEncoder()
-            let cardsData = try encoder.encode(cards)
-            UserDefaults.standard.set([cardsKey:cardsData], forKey: userSessionKey)
+             cachedCards.append(contentsOf: cards)
+            let cardsData = try encoder.encode(cachedCards)
+            let setsData = try encoder.encode(cachedSets)
+            print("caching")
+            UserDefaults.standard.set([ setsKey:setsData,cardsKey:cardsData], forKey: userSessionKey)
         }
         catch {
             print("Error")
@@ -31,7 +36,8 @@ struct Cache {
         do {
             let encoder = JSONEncoder()
             let setsData = try encoder.encode(sets)
-            UserDefaults.standard.set([setsKey: setsData], forKey: userSessionKey)
+            let cardsData = try encoder.encode(getCards())
+            UserDefaults.standard.set([setsKey: setsData, cardsKey: cardsData], forKey: userSessionKey)
         }
         catch {
             print("Error")
@@ -51,6 +57,10 @@ struct Cache {
         }
         
         return Cache(Sets: [], Cards:[]).Cards
+    }
+    
+    static func getSetCards(setId: String) -> [Card] {
+        return getCards().filter{$0.set.id == setId}
     }
     
     static func getSets() -> [Set] {

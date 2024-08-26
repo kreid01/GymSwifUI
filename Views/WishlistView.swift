@@ -28,17 +28,9 @@ public struct WishlistView: View {
                 ScrollView {
                     LazyVGrid(columns: layout) {
                         ForEach(data, id: \.self) { card in
-                            NavigationLink(destination: CardView(card: card)) {
-                                VStack {
-                                    URLImage(width: 100, urlString: card.images.large)
-                                    Text(card.name)
-                                        .padding()
-                                        .font(.system(size: 12))
-                                }
-                              
+                            SingleCard(card: card)
                                 .frame(height: 200)
                                 .draggable(card)
-                            }
                         }
                     }
                 }
@@ -70,7 +62,7 @@ public struct TrashView : View {
                     inProgress = isTargeted
                 }
                 .foregroundColor(.red)
-                .font(.system(size: 40))
+                .font(.system(size: 24))
                 .padding()
                 .background(inProgress ? Color.red.opacity(0.5) : .red.opacity(0.3))
                 .cornerRadius(5)

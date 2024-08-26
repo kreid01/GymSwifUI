@@ -18,15 +18,10 @@ struct SearchCardView: View {
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(searchResults, id: \.self) {
                     card in
-                    NavigationLink(destination: CardView(card: card)) {
-                        VStack {
-                            URLImage(width: 100, urlString: card.images.large)
-                            Text(card.name).padding().font(.system(size: 12))
-                        }.frame(height:200)
+                        SingleCard(card: card)
                     }
                 }
-                }
-            }.navigationTitle("Cards").searchable(text: $searchText).onChange(of: searchText) {
+            }.navigationTitle("").searchable(text: $searchText).onChange(of: searchText) {
                 search()
             }.searchSuggestions{
                 ForEach(filteredSuggestions, id: \.name) { suggestion in
