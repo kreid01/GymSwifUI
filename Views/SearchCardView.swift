@@ -22,11 +22,48 @@ struct SearchCardView: View {
         hideNavigationBar = card != nil;
     }
     
-    @Environment(\.dismissSearch) private var dismissSearch
-
+    @State var type: Int = 0
+    @State private var generation: Int = 0;
+    @State private var subType: Int = 0
+    
+    var types = ["All Types", "Fire", "Water", "Grass", "Dark", "Fairy",
+    "Psychic", "Dragon", "Poision", "Ghost", "Normal", "Fighting",
+    "Rock", "Ground"]
+    var subTypes = ["All Subtypes", "Mega", "VMax"]
+    
     
     var body: some View {
         NavigationStack {
+            HStack {
+                Picker(selection: $type, label: Text("Type")) {
+                    ForEach(Array(types.enumerated()), id: \.1) { index, item in
+                        Text(item).tag(index)
+                    }
+            }.onChange(of: type) { _ in
+                searchResults = []
+                search(page: page)
+            }
+                Picker(selection: $subType, label: Text("Sub Type")) {
+                    ForEach(Array(subTypes.enumerated()), id: \.1) { index, item in
+                        Text(item).tag(index)
+                    }
+                }.onChange(of: subType) { _ in
+                    searchResults = []
+                    search(page: page)
+                }
+
+                Picker(selection: $generation, label: Text("Generation")) {
+                    ForEach(0...7, id: \.self) { i in
+                        if i == 0 {
+                           Text("All Gens")
+                        }
+                        Text("Gen " + String(i + 1)).tag(i + 1)
+                    }
+                }.onChange(of: generation) { _ in
+                    searchResults = []
+            search(page: page)
+        }
+            }.frame(width: 1000)
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(
                     selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
@@ -76,11 +113,17 @@ struct SearchCardView: View {
 
     private func search(page: Int) {
         Task {
-            print(searchText)
+            let type = self.type == 0 ? "" : "types:\(self.types[type].lowercased()) "
+            let subtype = self.subType == 0 ? "" : "subtypes:\(self.subTypes[subType].lowercased()) "
+            var generation = self.generation == 0 ? "" : pokedexRange(for: String(self.generation))
+            var search = searchText == "" ? "" : "name:\(searchText) "
+            
             guard let url = URL(string:
-                                    "https://api.pokemontcg.io/v2/cards/?q=name:\(searchText)&pageSize=50&page=\(page)")
+                                    "https://api.pokemontcg.io/v2/cards?q=\(search)\(type)\(subtype)\(generation)&pageSize=50&page=1")
+                    
                 else { return }
             do {
+                print(url)
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let searchResultsResponse = try JSONDecoder().decode(CardResponse.self, from: data)
                 searchResults.append(contentsOf:  searchResultsResponse.data)
@@ -91,6 +134,26 @@ struct SearchCardView: View {
             }
             }
         }
+}
+
+func pokedexRange(for generation: String) -> String {
+    let generationRanges = [
+        "1": [1, 151],
+             "2": [152, 251],
+             "3": [252, 386],
+             "4": [387, 493],
+             "5": [494, 649],
+             "6": [650, 721],
+             "7": [722, 809],
+             "8": [810, 905],
+             "9": [906, 1010]
+    ]
+    
+    guard let range = generationRanges[generation] else {
+        return ""
+    }
+    
+    return "nationalPokedexNumbers:[\(range[0]) TO \(range[1])]"
 }
 
 

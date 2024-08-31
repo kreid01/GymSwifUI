@@ -32,7 +32,7 @@
 		855238AE2C7DF20D009E26A4 /* query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 855238AD2C7DF20D009E26A4 /* query.graphql */; };
 		855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 855238B92C7DFFF7009E26A4 /* ApolloAPI */; };
 		855238C82C7E0534009E26A4 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238C72C7E0534009E26A4 /* Network.swift */; };
-		85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* GymUIApp.swift */; };
+		85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* TCG_Poke.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
 		85D3061F2C5AC968008CB1B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */; };
@@ -68,10 +68,10 @@
 		855238AD2C7DF20D009E26A4 /* query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query.graphql; sourceTree = "<group>"; };
 		855238C72C7E0534009E26A4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* TCG Poke Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TCG Poke Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		85D306162C5AC966008CB1B6 /* GymUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymUIApp.swift; sourceTree = "<group>"; };
+		85D306162C5AC966008CB1B6 /* TCG_Poke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCG_Poke.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		85D3061A2C5AC968008CB1B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		85D3061C2C5AC968008CB1B6 /* GymUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymUI.entitlements; sourceTree = "<group>"; };
+		85D3061C2C5AC968008CB1B6 /* TCG Poke Swift.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TCG Poke Swift.entitlements"; sourceTree = "<group>"; };
 		85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85D306412C5D8DEC008CB1B6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		85D9B1CB2C7E30DA000F856D /* mutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutation.graphql; sourceTree = "<group>"; };
@@ -192,7 +192,7 @@
 				8552384F2C5FA134009E26A4 /* Views */,
 				8552384E2C5FA12E009E26A4 /* Controllers */,
 				855238492C5FA064009E26A4 /* Models */,
-				85D306152C5AC966008CB1B6 /* GymUI */,
+				85D306152C5AC966008CB1B6 /* TCG Poke Swift */,
 				85D306142C5AC966008CB1B6 /* Products */,
 				85D9B1D12C7E34F2000F856D /* Frameworks */,
 			);
@@ -206,18 +206,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		85D306152C5AC966008CB1B6 /* GymUI */ = {
+		85D306152C5AC966008CB1B6 /* TCG Poke Swift */ = {
 			isa = PBXGroup;
 			children = (
 				8552386B2C7B3CC1009E26A4 /* Info.plist */,
 				850F985C2C5D9D1900CB7B2A /* URLImage.swift */,
-				85D306162C5AC966008CB1B6 /* GymUIApp.swift */,
+				85D306162C5AC966008CB1B6 /* TCG_Poke.swift */,
 				85D306182C5AC966008CB1B6 /* ContentView.swift */,
 				85D3061A2C5AC968008CB1B6 /* Assets.xcassets */,
-				85D3061C2C5AC968008CB1B6 /* GymUI.entitlements */,
+				85D3061C2C5AC968008CB1B6 /* TCG Poke Swift.entitlements */,
 				85D3061D2C5AC968008CB1B6 /* Preview Content */,
 			);
-			path = GymUI;
+			path = "TCG Poke Swift";
 			sourceTree = "<group>";
 		};
 		85D3061D2C5AC968008CB1B6 /* Preview Content */ = {
@@ -338,7 +338,7 @@
 				8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */,
 				8552389B2C7CA419009E26A4 /* CollectionValue.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
-				85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */,
+				85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
 				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,
 				855238C82C7E0534009E26A4 /* Network.swift in Sources */,
@@ -467,13 +467,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = GymUI/GymUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "TCG Poke Swift/TCG Poke Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"GymUI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "TCG\\ Poke\\ Swift/Info.plist";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GymUI/Info.plist;
+				INFOPLIST_FILE = "TCG Poke Swift/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -504,13 +504,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = GymUI/GymUI.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "TCG Poke Swift/TCG Poke Swift.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"GymUI/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "TCG\\ Poke\\ Swift/Info.plist";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = GymUI/Info.plist;
+				INFOPLIST_FILE = "TCG Poke Swift/Info.plist";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
