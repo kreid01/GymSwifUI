@@ -1,0 +1,28 @@
+{
+  "schemaNamespace" : "ChatAPI",
+  "input" : {
+    "operationSearchPaths" : [
+      "**/*.graphql"
+    ],
+    "schemaSearchPaths" : [
+      "**/*.graphqls"
+    ]
+  },
+  "output" : {
+    "testMocks" : {
+      "none" : {
+      }
+    },
+    "schemaTypes" : {
+      "path" : "./ChatAPI",
+      "moduleType" : {
+        "swiftPackageManager" : {
+        }
+      }
+    },
+    "operations" : {
+      "inSchemaModule" : {
+      }
+    }
+  }
+}

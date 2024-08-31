@@ -12,8 +12,8 @@ struct SingleCard : View {
     var collectionRepository = CollectionRepository()
     
     @State var selected = false;
-    @State var offsetX: CGFloat = 0
-    @State var offsetY: CGFloat = 0
+    @State var offsetX: CGFloat = 50
+    @State var offsetY: CGFloat = 100
     @State var height: CGFloat = 200
     @State var width: CGFloat = 100
     
@@ -53,8 +53,8 @@ struct SingleCard : View {
                         withAnimation {
                             self.height = 800
                             self.width = 350
-                            self.offsetX = 115
-                            self.offsetY = -55
+                            self.offsetX = 175
+                            self.offsetY = 320
                         }
                                         
                         withAnimation(.easeInOut(duration: 0.5).delay(0.2))  {
@@ -113,13 +113,14 @@ struct SingleCard : View {
                     .onAppear{
                         updatePrices()
                     }
-            .frame(width: width,height: height).offset(x: offsetX, y: offsetY)
+            .frame(width: width,height: height).position(x: offsetX, y: offsetY)
             .gesture(
                                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
                                     .onChanged { value in
                                         if selected {
                                             if value.translation.height > 0 {
-                                                if value.translation.height > 350 {
+                                                if value.translation.height > 400 {
+                                                    print(value.translation.height)
                                                     handler(nil)
                                                     selected = false
                                                     withAnimation {
@@ -129,12 +130,12 @@ struct SingleCard : View {
                                                     }
 
                                                     withAnimation(.spring(duration :0.3).delay(0.1)) {
-                                                        self.offsetY = 0
-                                                        self.offsetX = 0
+                                                        self.offsetY = 100
+                                                        self.offsetX = 50
                                                     }
                                                 } else {
                                                     withAnimation {
-                                                        self.offsetY = value.translation.height
+                                                        self.offsetY = 320 + value.translation.height
                                                     }
                                                 }
                                         }

@@ -5,6 +5,11 @@ class CollectionRepository {
     
     func AddToCollection(card: Card) {
         var collection = Storage.getCollection()
+        
+        if collection.contains(where: {$0.id == card.id}) {
+            return;
+        }
+
          if collection.count == 0 {
              Storage.saveCollection(collection: [card] )
          } else {
@@ -13,9 +18,9 @@ class CollectionRepository {
          }
     }
     
-    func RemoveFromCollection(card: Card) {
+    func RemoveFromCollection(id: String) {
          var collection = Storage.getCollection()
-         collection = collection.filter{$0.id != card.id}
+         collection = collection.filter{$0.id != id}
          Storage.saveCollection( collection: collection)
     }
 }

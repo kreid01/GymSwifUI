@@ -8,6 +8,11 @@ public struct WishlistRepository {
     
     func AddToWishlist(card: Card) {
        var wishlist = Storage.getWishlist()
+        
+        if wishlist.contains(where: {$0.id == card.id}) {
+            return;
+        }
+
         if wishlist.count == 0 {
             Storage.saveWishlist(wishlist: [card])
         } else {
@@ -16,9 +21,9 @@ public struct WishlistRepository {
         }
     }
     
-    func RemoveFromWishlist(card: Card) {
+    func RemoveFromWishlist(id: String) {
          var wishlist = Storage.getWishlist()
-         wishlist = wishlist.filter{$0.id != card.id}
+         wishlist = wishlist.filter{$0.id != id}
          Storage.saveWishlist(wishlist:wishlist)
     }
 }

@@ -22,7 +22,7 @@ struct ContentView: View {
                              }
                 ChatView()
                              .tabItem {
-                                 Label("Chat", systemImage: "list.star")
+                                 Label("Chat", systemImage: "message")
                              }
             }
         }

@@ -1,4 +1,5 @@
 import SwiftUI
+import UniformTypeIdentifiers
 
 public struct WishlistView: View {
     var wishlistRepository = WishlistRepository()
@@ -8,9 +9,9 @@ public struct WishlistView: View {
         data = wishlistRepository.GetWishlistPokemon()
     }
 
-    func removeFromWishlist(card: Card) {
-        data = data.filter { $0.id != card.id }
-        wishlistRepository.RemoveFromWishlist(card: card)
+    func removeFromWishlist(id: String) {
+        data = data.filter { $0.id != id }
+        wishlistRepository.RemoveFromWishlist(id: id)
     }
 
     let layout = [
@@ -20,7 +21,7 @@ public struct WishlistView: View {
     ]
 
     @State private var inProgress = false
-    @State private var isDragging = false;
+    @State private var isDeleting = false;
     
     @State private var selectedCard: Card?
     
@@ -32,22 +33,39 @@ public struct WishlistView: View {
 
     public var body: some View {
         NavigationView {
-            ZStack {
+            VStack {
+                Button(action: {
+                    self.isDeleting = !isDeleting
+                }, label: {
+                    Image(systemName: isDeleting ? "square.and.arrow.down" : "square.and.pencil")
+                        .font(.system(size: 28))
+                }).offset(x: 150, y: 0)
                 ScrollView {
                     LazyVGrid(columns: layout) {
                         ForEach(
                             selectedCard != nil ? [selectedCard!] : data, id: \.self) { card in
-                            SingleCard(card: card, handler: selectCard)
-                                .draggable(card)
-                        }
+                                ZStack {
+                                    SingleCard(card: card, handler: selectCard)
+                                        .opacity(isDeleting ? 0.3 : 1.0)
+                                    if isDeleting {
+                                        Button(action:{ removeFromWishlist(id: card.id)}, label: {
+                                            Image(systemName: "trash")
+                                                .offset(x: -5, y:-20)
+                                                .font(.system(size:32))
+                                                .foregroundColor(.red)
+                                                .padding()
+
+                                        })
+                                    }
+                                }
+                            }
                     }
                 }.scrollDisabled(hideNavigationBar)
-                .navigationBarTitle("Wishlist", displayMode: .inline)
+                    .navigationBarTitle("Wishlist", displayMode: .inline)
                 .navigationBarHidden(hideNavigationBar)
-
-                if !hideNavigationBar {TrashView(handler: removeFromWishlist(card:), inProgress: inProgress)}
             }
-        }.refreshable {
+        }
+        .refreshable {
             refresh()
         }
         .onAppear {
@@ -56,30 +74,7 @@ public struct WishlistView: View {
     }
 }
 
-public struct TrashView : View {
-    var handler: (Card) -> Void
-    @State public var inProgress: Bool;
-    
-    public var body: some View {
-        VStack {
-            Spacer()
-            Image(systemName: "trash")
-                .dropDestination(for: Card.self) { droppedCards, location in
-                    handler(droppedCards[0])
-                    return true
-                } isTargeted: { isTargeted in
-                    inProgress = isTargeted
-                }
-                .foregroundColor(.red)
-                .font(.system(size: 28))
-                .padding()
-                .background(inProgress ? Color.red.opacity(0.5) : .red.opacity(0.3))
-                .cornerRadius(5)
-                .offset(x: 0, y: -50)
-        }
-    }
-}
-
 #Preview {
     WishlistView()
 }
+
