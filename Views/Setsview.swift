@@ -56,8 +56,19 @@ struct SetsView : View {
                     NavigationLink(destination: SetView(set: set)) {
                         HStack {
                             if let image = set.images["logo"] {
-                                URLImage(width: 100, urlString: image)
-                            }
+                                CacheAsyncImage(url: URL(string : image)!) {
+                                    phase in
+                                    switch phase {
+                                    case .success(let image):
+                                        image.resizable().scaledToFit()
+                                    case .empty:
+                                        ProgressView()
+                                    case .failure(_):
+                                        ProgressView()
+                                    @unknown default:
+                                        fatalError()
+                                    }
+                                }                         }
                             Text(set.name).font(.custom("VT323", size: 24)).padding()
                         }
                     }    
@@ -67,7 +78,7 @@ struct SetsView : View {
             .navigationTitle("")
             .searchable(text: $searchText)
                 .onAppear {
-                        viewModel.fetch()
+                    viewModel.fetchMore(page: 1)
                 }
         }
     }

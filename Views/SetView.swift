@@ -3,6 +3,7 @@ import SwiftUI
 struct SetView : View {
     let selectedSet: Set
     @State private var searchText = "";
+    @State private var page = 1;
     @State private var selectedCard: Card?
     @StateObject var setViewModel: ViewModel<CardResponse>
     init(set:Set) {
@@ -82,7 +83,12 @@ struct SetView : View {
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(
                     selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
-                    card in SingleCard(card: card, handler: selectCard)
+                        card in SingleCard(card: card, handler: selectCard).task {
+                            if card == setViewModel.data.last {
+                                page += 1
+                                 setViewModel.fetchMore(page: page)
+                            }
+                        }
                     }
                 }
     }.scrollDisabled(hideNavigationBar)
@@ -90,7 +96,7 @@ struct SetView : View {
             .navigationBarHidden(hideNavigationBar)
             .searchable(text: $searchText)
                 .onAppear {
-                    setViewModel.fetch()
+                    setViewModel.fetchMore(page:page)
             }
         }
     }

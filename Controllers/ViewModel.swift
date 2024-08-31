@@ -12,13 +12,14 @@ class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
         self.cachedData = cachedData;
     }
     
-    func fetch() {
+    func fetchMore(page: Int) {
         if cachedData == [] {
-            guard let url = URL(string:uri) else {
+            guard let url = URL(string:uri + "&pageSize=50&page=\(page)") else {
                 return
             }
             
             var request = URLRequest(url: url)
+            print(url)
             request.setValue("X-Api-Key", forHTTPHeaderField: "ba775f42-3e3c-4fe2-84ee-def10fa44232")
             
             let task = URLSession.shared.dataTask(with: request) { [weak self] data, _, error in
@@ -28,7 +29,7 @@ class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
                 do {
                     let decodedData = try JSONDecoder().decode(T.self, from: data)
                                    DispatchQueue.main.async {
-                                       self?.data = decodedData.data
+                                       self?.data.append(contentsOf: decodedData.data)
                                        self?.saveHandler(decodedData.data)
                     }
                 }
@@ -45,3 +46,6 @@ class ViewModel<T: DataContainer>: ObservableObject where T: Decodable{
 }
 
 
+#Preview {
+    SetsView()
+}

@@ -6,6 +6,7 @@ struct SearchCardView: View {
     @State private var searchText = "";
     @State private var searchResults: [Card] = [];
     @State private var filteredSuggestions: [Pokemon] = []
+    @State private var page = 1;
     
     let layout = [
         GridItem(.fixed(110)),
@@ -31,13 +32,21 @@ struct SearchCardView: View {
                     selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
                         card in
                         SingleCard(card: card, handler: selectCard)
+                            .task{
+                            if card == searchResults.last {
+                                page += 1
+                                search(page: page)
+                            }
+                        }
                     }
                 }
             }.scrollDisabled(hideNavigationBar)
                 .navigationTitle("")
                 .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
                 .onChange(of: searchText) {
-                    search()
+                    page = 1;
+                    searchResults = []
+                    search(page: page)
                 }.searchSuggestions{
                     if searchResults == [] {
                         ForEach(filteredSuggestions, id: \.name) { suggestion in
@@ -65,16 +74,16 @@ struct SearchCardView: View {
         }
     }
 
-    private func search() {
+    private func search(page: Int) {
         Task {
             print(searchText)
             guard let url = URL(string:
-                                    "https://api.pokemontcg.io/v2/cards/?q=name:\(searchText)")
+                                    "https://api.pokemontcg.io/v2/cards/?q=name:\(searchText)&pageSize=50&page=\(page)")
                 else { return }
             do {
                 let (data, _) = try await URLSession.shared.data(from: url)
                 let searchResultsResponse = try JSONDecoder().decode(CardResponse.self, from: data)
-                    searchResults = searchResultsResponse.data
+                searchResults.append(contentsOf:  searchResultsResponse.data)
                 filteredSuggestions = suggestions.filter {  $0.name.lowercased().contains(searchText.lowercased()) }
                 
             } catch {

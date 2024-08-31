@@ -11,7 +11,6 @@
 		850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985E2C5DB15900CB7B2A /* SetView.swift */; };
 		8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384A2C5FA07E009E26A4 /* CardModels.swift */; };
 		8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384C2C5FA0A5009E26A4 /* SetModels.swift */; };
-		855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238502C5FA155009E26A4 /* CardViewModel.swift */; };
 		855238592C5FA620009E26A4 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238582C5FA620009E26A4 /* SetsView.swift */; };
 		8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385A2C5FB04F009E26A4 /* SearchCardView.swift */; };
 		855238602C6E761A009E26A4 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385F2C6E761A009E26A4 /* WishlistView.swift */; };
@@ -40,6 +39,7 @@
 		85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306412C5D8DEC008CB1B6 /* ViewModel.swift */; };
 		85D9B1CC2C7E30DA000F856D /* mutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85D9B1CB2C7E30DA000F856D /* mutation.graphql */; };
 		85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 85D9B1D22C7E34F2000F856D /* ChatAPI */; };
+		85D9B1D72C8327CB000F856D /* AsyncCacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D9B1D62C8327CB000F856D /* AsyncCacheImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +47,6 @@
 		850F985E2C5DB15900CB7B2A /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
 		8552384A2C5FA07E009E26A4 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
 		8552384C2C5FA0A5009E26A4 /* SetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModels.swift; sourceTree = "<group>"; };
-		855238502C5FA155009E26A4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		855238582C5FA620009E26A4 /* SetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		8552385A2C5FB04F009E26A4 /* SearchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardView.swift; sourceTree = "<group>"; };
 		8552385F2C6E761A009E26A4 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
@@ -76,6 +75,7 @@
 		85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85D306412C5D8DEC008CB1B6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		85D9B1CB2C7E30DA000F856D /* mutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutation.graphql; sourceTree = "<group>"; };
+		85D9B1D62C8327CB000F856D /* AsyncCacheImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncCacheImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +95,7 @@
 		855238492C5FA064009E26A4 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				8552389A2C7CA419009E26A4 /* CollectionValue.swift */,
 				8552384C2C5FA0A5009E26A4 /* SetModels.swift */,
 				8552384A2C5FA07E009E26A4 /* CardModels.swift */,
 			);
@@ -105,8 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
-				855238502C5FA155009E26A4 /* CardViewModel.swift */,
-				8552389A2C7CA419009E26A4 /* CollectionValue.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -147,6 +146,7 @@
 			children = (
 				855238652C710355009E26A4 /* DataUtils.swift */,
 				855238982C7CA3A6009E26A4 /* CollectionValueUtils.swift */,
+				85D9B1D62C8327CB000F856D /* AsyncCacheImage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -332,12 +332,12 @@
 				855238972C7CA331009E26A4 /* PriceRangeGrid.swift in Sources */,
 				8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */,
 				855238662C710355009E26A4 /* DataUtils.swift in Sources */,
+				85D9B1D72C8327CB000F856D /* AsyncCacheImage.swift in Sources */,
 				8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */,
 				855238952C7B978D009E26A4 /* SingleCard.swift in Sources */,
 				8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */,
 				8552389B2C7CA419009E26A4 /* CollectionValue.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
-				855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */,
 				85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
 				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,

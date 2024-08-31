@@ -31,11 +31,12 @@ struct SingleCard : View {
 
     var body: some View {
             VStack {
-                CacheAsyncImage(url: URL(string :card.images.large)!) {
+                CacheAsyncImage(url: URL(string :card.images.large)!, scale: 5.5, desiredWidth: width,
+                                desiredHeight: height * 0.65) {
                     phase in
                     switch phase {
                     case .success(let image):
-                        image
+                        image.resizable().scaledToFit()
                     case .empty:
                         ProgressView()
                     case .failure(_):
@@ -56,7 +57,7 @@ struct SingleCard : View {
                             self.offsetY = -55
                         }
                                         
-                        withAnimation(.easeInOut(duration: 0.5))  {
+                        withAnimation(.easeInOut(duration: 0.5).delay(0.2))  {
                             self.buttonOffsetX = 0
                         }
                     } else {
@@ -148,47 +149,3 @@ struct SingleCard : View {
 }
 
 
-struct CacheAsyncImage<Content> : View where Content: View{
-    private let url: URL
-    private let scale: CGFloat;
-    private let transaction: Transaction
-    private let content: (AsyncImagePhase) -> Content;
-    
-    init(url: URL, 
-         scale: CGFloat = 1.0,
-         transaction: Transaction = Transaction(),
-        @ViewBuilder content:  @escaping (AsyncImagePhase) -> Content) {
-        self.url = url
-        self.scale = scale
-        self.transaction = transaction
-        self.content = content
-    }
-    
-    var body : some View {
-        if let cached = ImageCache[url] {
-            content(.success(cached))
-        } else {
-            AsyncImage(url: url, scale: scale, transaction:  transaction) {
-                phase in
-                if case .success(let image) = phase {
-                    ImageCache[url] = image;
-                }
-                
-                return content(phase)
-            }
-        }
-    }
-}
-
-fileprivate class ImageCache {
-    static private var cahce: [URL: Image] = [:]
-    
-    static subscript(url: URL) -> Image? {
-        get {
-            ImageCache.cahce[url]
-        }
-        set {
-            ImageCache.cahce[url] = newValue
-        }
-    }
-}
