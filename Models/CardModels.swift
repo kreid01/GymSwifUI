@@ -11,7 +11,6 @@ struct Card: Codable, Hashable, Transferable {
     let hp: String?
     let types: [String]?
     let images: PokemonImages
-    let attacks: [Attack]?
     let tcgplayer: TCGPlayer?
     let number: String
     let set: Set
@@ -26,8 +25,8 @@ extension UTType  {
 }
 
 struct TCGPlayer : Codable, Hashable {
-    let url : String
-    let prices: Prices
+    let url : String?
+    let prices: Prices?
 }
 
 struct Prices: Codable, Hashable  {

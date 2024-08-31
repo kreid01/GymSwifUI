@@ -1,0 +1,21 @@
+type Query {
+	message(id:ID!): Message 
+	messages: [Message!]!
+}
+
+type Mutation {
+	postMessage(input: MessageInput!): Message!
+}
+
+type Message {
+	id: ID!
+	content: String!
+	user: String!
+	date: String!
+}
+
+input MessageInput {
+	content: String!
+	user :String!
+	date: String!
+}

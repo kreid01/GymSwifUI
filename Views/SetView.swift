@@ -1,7 +1,5 @@
 import SwiftUI
 
-
-
 struct SetView : View {
     let selectedSet: Set
     @State private var searchText = "";

@@ -9,20 +9,20 @@ import Foundation
 
 class CollectionValueUtils {
     func getCollectionValue(cards: [Card]) -> CollectionValue {
-        let normalLow = getTotals(values: cards.map { $0.tcgplayer?.prices.normal?.low })
-        let normalMid = getTotals(values: cards.map { $0.tcgplayer?.prices.normal?.mid })
-        let normalHigh = getTotals(values: cards.map { $0.tcgplayer?.prices.normal?.high })
-        let normalMarket = getTotals(values: cards.map { $0.tcgplayer?.prices.normal?.market })
+        let normalLow = getTotals(values: cards.map { $0.tcgplayer?.prices?.normal?.low })
+        let normalMid = getTotals(values: cards.map { $0.tcgplayer?.prices?.normal?.mid })
+        let normalHigh = getTotals(values: cards.map { $0.tcgplayer?.prices?.normal?.high })
+        let normalMarket = getTotals(values: cards.map { $0.tcgplayer?.prices?.normal?.market })
 
-        let holofoilLow = getTotals(values: cards.map { $0.tcgplayer?.prices.holofoil?.low })
-        let holofoilMid = getTotals(values: cards.map { $0.tcgplayer?.prices.holofoil?.mid })
-        let holofoilHigh = getTotals(values: cards.map { $0.tcgplayer?.prices.holofoil?.high })
-        let holofoilMarket = getTotals(values: cards.map { $0.tcgplayer?.prices.holofoil?.market })
+        let holofoilLow = getTotals(values: cards.map { $0.tcgplayer?.prices?.holofoil?.low })
+        let holofoilMid = getTotals(values: cards.map { $0.tcgplayer?.prices?.holofoil?.mid })
+        let holofoilHigh = getTotals(values: cards.map { $0.tcgplayer?.prices?.holofoil?.high })
+        let holofoilMarket = getTotals(values: cards.map { $0.tcgplayer?.prices?.holofoil?.market })
 
-        let reverseHolofoilLow = getTotals(values: cards.map { $0.tcgplayer?.prices.reverseHolofoil?.low })
-        let reverseHolofoilMid = getTotals(values: cards.map { $0.tcgplayer?.prices.reverseHolofoil?.mid })
-        let reverseHolofoilHigh = getTotals(values: cards.map { $0.tcgplayer?.prices.reverseHolofoil?.high })
-        let reverseHolofoilMarket = getTotals(values: cards.map { $0.tcgplayer?.prices.reverseHolofoil?.market })
+        let reverseHolofoilLow = getTotals(values: cards.map { $0.tcgplayer?.prices?.reverseHolofoil?.low })
+        let reverseHolofoilMid = getTotals(values: cards.map { $0.tcgplayer?.prices?.reverseHolofoil?.mid })
+        let reverseHolofoilHigh = getTotals(values: cards.map { $0.tcgplayer?.prices?.reverseHolofoil?.high })
+        let reverseHolofoilMarket = getTotals(values: cards.map { $0.tcgplayer?.prices?.reverseHolofoil?.market })
 
         let normalPriceRange = PriceRange(
             low: normalLow,

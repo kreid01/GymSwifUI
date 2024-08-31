@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,14 +14,10 @@
 		855238512C5FA155009E26A4 /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238502C5FA155009E26A4 /* CardViewModel.swift */; };
 		855238592C5FA620009E26A4 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238582C5FA620009E26A4 /* SetsView.swift */; };
 		8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385A2C5FB04F009E26A4 /* SearchCardView.swift */; };
-		8552385E2C6E75CC009E26A4 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385D2C6E75CC009E26A4 /* WishlistRepository.swift */; };
 		855238602C6E761A009E26A4 /* WishlistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552385F2C6E761A009E26A4 /* WishlistView.swift */; };
 		855238632C70FDF5009E26A4 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238622C70FDF5009E26A4 /* Storage.swift */; };
 		855238662C710355009E26A4 /* DataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238652C710355009E26A4 /* DataUtils.swift */; };
 		855238682C71181F009E26A4 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238672C71181F009E26A4 /* CollectionView.swift */; };
-		8552386A2C711877009E26A4 /* CollectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238692C711877009E26A4 /* CollectionRepository.swift */; };
-		855238742C7B5170009E26A4 /* CollectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238712C7B5170009E26A4 /* CollectionRepository.swift */; };
-		855238752C7B5171009E26A4 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238722C7B5170009E26A4 /* WishlistRepository.swift */; };
 		855238772C7B52C0009E26A4 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238762C7B52C0009E26A4 /* Cache.swift */; };
 		855238852C7B8C87009E26A4 /* SFProText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 855238842C7B8C87009E26A4 /* SFProText-Regular.ttf */; };
 		855238892C7B8C9F009E26A4 /* VT323-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 855238882C7B8C9F009E26A4 /* VT323-Regular.ttf */; };
@@ -29,11 +25,21 @@
 		855238972C7CA331009E26A4 /* PriceRangeGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238962C7CA331009E26A4 /* PriceRangeGrid.swift */; };
 		855238992C7CA3A6009E26A4 /* CollectionValueUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238982C7CA3A6009E26A4 /* CollectionValueUtils.swift */; };
 		8552389B2C7CA419009E26A4 /* CollectionValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552389A2C7CA419009E26A4 /* CollectionValue.swift */; };
+		8552389E2C7DEFBA009E26A4 /* WishlistRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552389D2C7DEFBA009E26A4 /* WishlistRepository.swift */; };
+		855238A02C7DEFEE009E26A4 /* CollectionRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552389F2C7DEFEE009E26A4 /* CollectionRepository.swift */; };
+		855238A22C7DF01D009E26A4 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238A12C7DF01D009E26A4 /* ChatView.swift */; };
+		855238A52C7DF133009E26A4 /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 855238A42C7DF133009E26A4 /* Apollo */; };
+		855238A82C7DF151009E26A4 /* schema.graphqls in Resources */ = {isa = PBXBuildFile; fileRef = 855238A72C7DF151009E26A4 /* schema.graphqls */; };
+		855238AE2C7DF20D009E26A4 /* query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 855238AD2C7DF20D009E26A4 /* query.graphql */; };
+		855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 855238B92C7DFFF7009E26A4 /* ApolloAPI */; };
+		855238C82C7E0534009E26A4 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238C72C7E0534009E26A4 /* Network.swift */; };
 		85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* GymUIApp.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
 		85D3061F2C5AC968008CB1B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */; };
 		85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306412C5D8DEC008CB1B6 /* ViewModel.swift */; };
+		85D9B1CC2C7E30DA000F856D /* mutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85D9B1CB2C7E30DA000F856D /* mutation.graphql */; };
+		85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 85D9B1D22C7E34F2000F856D /* ChatAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,15 +50,11 @@
 		855238502C5FA155009E26A4 /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
 		855238582C5FA620009E26A4 /* SetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
 		8552385A2C5FB04F009E26A4 /* SearchCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCardView.swift; sourceTree = "<group>"; };
-		8552385D2C6E75CC009E26A4 /* WishlistRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
 		8552385F2C6E761A009E26A4 /* WishlistView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishlistView.swift; sourceTree = "<group>"; };
 		855238622C70FDF5009E26A4 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		855238652C710355009E26A4 /* DataUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtils.swift; sourceTree = "<group>"; };
 		855238672C71181F009E26A4 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
-		855238692C711877009E26A4 /* CollectionRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionRepository.swift; sourceTree = "<group>"; };
 		8552386B2C7B3CC1009E26A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		855238712C7B5170009E26A4 /* CollectionRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRepository.swift; sourceTree = "<group>"; };
-		855238722C7B5170009E26A4 /* WishlistRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
 		855238762C7B52C0009E26A4 /* Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		855238842C7B8C87009E26A4 /* SFProText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProText-Regular.ttf"; sourceTree = "<group>"; };
 		855238882C7B8C9F009E26A4 /* VT323-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "VT323-Regular.ttf"; path = "../../Downloads/VT323/VT323-Regular.ttf"; sourceTree = "<group>"; };
@@ -60,6 +62,12 @@
 		855238962C7CA331009E26A4 /* PriceRangeGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceRangeGrid.swift; sourceTree = "<group>"; };
 		855238982C7CA3A6009E26A4 /* CollectionValueUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionValueUtils.swift; sourceTree = "<group>"; };
 		8552389A2C7CA419009E26A4 /* CollectionValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionValue.swift; sourceTree = "<group>"; };
+		8552389D2C7DEFBA009E26A4 /* WishlistRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishlistRepository.swift; sourceTree = "<group>"; };
+		8552389F2C7DEFEE009E26A4 /* CollectionRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionRepository.swift; sourceTree = "<group>"; };
+		855238A12C7DF01D009E26A4 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		855238A72C7DF151009E26A4 /* schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
+		855238AD2C7DF20D009E26A4 /* query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query.graphql; sourceTree = "<group>"; };
+		855238C72C7E0534009E26A4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* GymUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D306162C5AC966008CB1B6 /* GymUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GymUIApp.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -67,6 +75,7 @@
 		85D3061C2C5AC968008CB1B6 /* GymUI.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymUI.entitlements; sourceTree = "<group>"; };
 		85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		85D306412C5D8DEC008CB1B6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		85D9B1CB2C7E30DA000F856D /* mutation.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = mutation.graphql; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +83,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */,
+				855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */,
+				855238A52C7DF133009E26A4 /* Apollo in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +119,7 @@
 				8552385A2C5FB04F009E26A4 /* SearchCardView.swift */,
 				8552385F2C6E761A009E26A4 /* WishlistView.swift */,
 				855238672C71181F009E26A4 /* CollectionView.swift */,
+				855238A12C7DF01D009E26A4 /* ChatView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -114,9 +127,8 @@
 		8552385C2C6E75B9009E26A4 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				855238732C7B5170009E26A4 /* Repositories */,
-				8552385D2C6E75CC009E26A4 /* WishlistRepository.swift */,
-				855238692C711877009E26A4 /* CollectionRepository.swift */,
+				8552389F2C7DEFEE009E26A4 /* CollectionRepository.swift */,
+				8552389D2C7DEFBA009E26A4 /* WishlistRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -139,15 +151,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		855238732C7B5170009E26A4 /* Repositories */ = {
-			isa = PBXGroup;
-			children = (
-				855238712C7B5170009E26A4 /* CollectionRepository.swift */,
-				855238722C7B5170009E26A4 /* WishlistRepository.swift */,
-			);
-			name = Repositories;
-			sourceTree = "<group>";
-		};
 		855238782C7B85D7009E26A4 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -166,9 +169,21 @@
 			path = Components;
 			sourceTree = "<group>";
 		};
+		855238A62C7DF13B009E26A4 /* GraphQL */ = {
+			isa = PBXGroup;
+			children = (
+				855238AD2C7DF20D009E26A4 /* query.graphql */,
+				855238A72C7DF151009E26A4 /* schema.graphqls */,
+				855238C72C7E0534009E26A4 /* Network.swift */,
+				85D9B1CB2C7E30DA000F856D /* mutation.graphql */,
+			);
+			path = GraphQL;
+			sourceTree = "<group>";
+		};
 		85D3060A2C5AC966008CB1B6 = {
 			isa = PBXGroup;
 			children = (
+				855238A62C7DF13B009E26A4 /* GraphQL */,
 				855238932C7B977C009E26A4 /* Components */,
 				855238782C7B85D7009E26A4 /* Fonts */,
 				855238642C71034C009E26A4 /* Utils */,
@@ -179,6 +194,7 @@
 				855238492C5FA064009E26A4 /* Models */,
 				85D306152C5AC966008CB1B6 /* GymUI */,
 				85D306142C5AC966008CB1B6 /* Products */,
+				85D9B1D12C7E34F2000F856D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +228,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		85D9B1D12C7E34F2000F856D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -229,6 +252,9 @@
 			);
 			name = GymUI;
 			packageProductDependencies = (
+				855238A42C7DF133009E26A4 /* Apollo */,
+				855238B92C7DFFF7009E26A4 /* ApolloAPI */,
+				85D9B1D22C7E34F2000F856D /* ChatAPI */,
 			);
 			productName = GymUI;
 			productReference = 85D306132C5AC966008CB1B6 /* GymUI.app */;
@@ -259,6 +285,8 @@
 			);
 			mainGroup = 85D3060A2C5AC966008CB1B6;
 			packageReferences = (
+				855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				855238C42C7E04F3009E26A4 /* XCLocalSwiftPackageReference "ChatAPI" */,
 			);
 			productRefGroup = 85D306142C5AC966008CB1B6 /* Products */;
 			projectDirPath = "";
@@ -274,10 +302,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				855238AE2C7DF20D009E26A4 /* query.graphql in Resources */,
 				85D3061F2C5AC968008CB1B6 /* Preview Assets.xcassets in Resources */,
+				855238A82C7DF151009E26A4 /* schema.graphqls in Resources */,
 				855238852C7B8C87009E26A4 /* SFProText-Regular.ttf in Resources */,
 				855238892C7B8C9F009E26A4 /* VT323-Regular.ttf in Resources */,
 				85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */,
+				85D9B1CC2C7E30DA000F856D /* mutation.graphql in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,17 +320,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				855238602C6E761A009E26A4 /* WishlistView.swift in Sources */,
-				855238742C7B5170009E26A4 /* CollectionRepository.swift in Sources */,
+				855238A02C7DEFEE009E26A4 /* CollectionRepository.swift in Sources */,
 				855238632C70FDF5009E26A4 /* Storage.swift in Sources */,
+				8552389E2C7DEFBA009E26A4 /* WishlistRepository.swift in Sources */,
+				855238A22C7DF01D009E26A4 /* ChatView.swift in Sources */,
 				85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */,
 				855238992C7CA3A6009E26A4 /* CollectionValueUtils.swift in Sources */,
 				855238772C7B52C0009E26A4 /* Cache.swift in Sources */,
 				855238592C5FA620009E26A4 /* SetsView.swift in Sources */,
-				8552385E2C6E75CC009E26A4 /* WishlistRepository.swift in Sources */,
 				855238682C71181F009E26A4 /* CollectionView.swift in Sources */,
 				855238972C7CA331009E26A4 /* PriceRangeGrid.swift in Sources */,
 				8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */,
-				8552386A2C711877009E26A4 /* CollectionRepository.swift in Sources */,
 				855238662C710355009E26A4 /* DataUtils.swift in Sources */,
 				8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */,
 				855238952C7B978D009E26A4 /* SingleCard.swift in Sources */,
@@ -310,7 +341,7 @@
 				85D306172C5AC966008CB1B6 /* GymUIApp.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
 				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,
-				855238752C7B5171009E26A4 /* WishlistRepository.swift in Sources */,
+				855238C82C7E0534009E26A4 /* Network.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,6 +558,42 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		855238C42C7E04F3009E26A4 /* XCLocalSwiftPackageReference "ChatAPI" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ChatAPI;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.15.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		855238A42C7DF133009E26A4 /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		855238B92C7DFFF7009E26A4 /* ApolloAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloAPI;
+		};
+		85D9B1D22C7E34F2000F856D /* ChatAPI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 855238C42C7E04F3009E26A4 /* XCLocalSwiftPackageReference "ChatAPI" */;
+			productName = ChatAPI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 85D3060B2C5AC966008CB1B6 /* Project object */;
 }

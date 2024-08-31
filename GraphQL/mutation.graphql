@@ -1,0 +1,9 @@
+mutation postMessage($input: MessageInput!) {
+  postMessage(input: $input) {
+    id
+    content
+    date
+    user
+  }
+}
+

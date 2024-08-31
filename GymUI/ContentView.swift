@@ -16,9 +16,13 @@ struct ContentView: View {
                              .tabItem {
                                  Label("Collection", systemImage: "list.dash")
                              }
-                WishlistView()
+              WishlistView()
                              .tabItem {
                                  Label("Wishlist", systemImage: "list.star")
+                             }
+                ChatView()
+                             .tabItem {
+                                 Label("Chat", systemImage: "list.star")
                              }
             }
         }
