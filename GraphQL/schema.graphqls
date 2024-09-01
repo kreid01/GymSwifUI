@@ -1,21 +1,44 @@
+directive @relation(fields: [String], references: [String]) on FIELD_DEFINITION
+
+
 type Query {
-	message(id:ID!): Message 
-	messages: [Message!]!
+    message(id:ID!): Message
+    messages: [Message!]!
+    channel(id: ID!, page: Int = 1, pageSize: Int = 20): Channel!
 }
 
 type Mutation {
-	postMessage(input: MessageInput!): Message!
+    postMessage(input: MessageInput!): Message!
+    postChannel(input: ChannelInput!): Channel!
+}
+
+type Subscription {
+    messages(channelId: ID!): [Message]!
+}
+
+type Channel {
+    id: ID!
+    name: String
+    messages: [Message]!
 }
 
 type Message {
-	id: ID!
-	content: String!
-	user: String!
-	date: String!
+    id: ID!
+    content: String!
+    user: String!
+    date: String!
+    channel : Channel! @relation(fields: [channelId], references: [id])
+    channelId: Int!
+}
+
+input ChannelInput {
+    name: String!
 }
 
 input MessageInput {
-	content: String!
-	user :String!
-	date: String!
+    content: String!
+    user :String!
+    date: String!
+    channelId: Int!
 }
+

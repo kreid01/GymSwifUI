@@ -32,6 +32,9 @@
 		855238AE2C7DF20D009E26A4 /* query.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 855238AD2C7DF20D009E26A4 /* query.graphql */; };
 		855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 855238B92C7DFFF7009E26A4 /* ApolloAPI */; };
 		855238C82C7E0534009E26A4 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238C72C7E0534009E26A4 /* Network.swift */; };
+		857F55692C83A18C00F52563 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 857F55682C83A18C00F52563 /* ApolloWebSocket */; };
+		857F556B2C83AA8800F52563 /* subscriptions.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 857F556A2C83AA8800F52563 /* subscriptions.graphql */; };
+		857F556F2C84C1EC00F52563 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857F556E2C84C1EC00F52563 /* ChatViewModel.swift */; };
 		85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* TCG_Poke.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
@@ -67,6 +70,8 @@
 		855238A72C7DF151009E26A4 /* schema.graphqls */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = schema.graphqls; sourceTree = "<group>"; };
 		855238AD2C7DF20D009E26A4 /* query.graphql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = query.graphql; sourceTree = "<group>"; };
 		855238C72C7E0534009E26A4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		857F556A2C83AA8800F52563 /* subscriptions.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = subscriptions.graphql; sourceTree = "<group>"; };
+		857F556E2C84C1EC00F52563 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* TCG Poke Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TCG Poke Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D306162C5AC966008CB1B6 /* TCG_Poke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCG_Poke.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +89,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */,
+				857F55692C83A18C00F52563 /* ApolloWebSocket in Frameworks */,
 				855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */,
 				855238A52C7DF133009E26A4 /* Apollo in Frameworks */,
 			);
@@ -106,6 +112,7 @@
 			isa = PBXGroup;
 			children = (
 				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
+				857F556E2C84C1EC00F52563 /* ChatViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -176,6 +183,7 @@
 				855238A72C7DF151009E26A4 /* schema.graphqls */,
 				855238C72C7E0534009E26A4 /* Network.swift */,
 				85D9B1CB2C7E30DA000F856D /* mutation.graphql */,
+				857F556A2C83AA8800F52563 /* subscriptions.graphql */,
 			);
 			path = GraphQL;
 			sourceTree = "<group>";
@@ -255,6 +263,7 @@
 				855238A42C7DF133009E26A4 /* Apollo */,
 				855238B92C7DFFF7009E26A4 /* ApolloAPI */,
 				85D9B1D22C7E34F2000F856D /* ChatAPI */,
+				857F55682C83A18C00F52563 /* ApolloWebSocket */,
 			);
 			productName = GymUI;
 			productReference = 85D306132C5AC966008CB1B6 /* TCG Poke Swift.app */;
@@ -304,6 +313,7 @@
 			files = (
 				855238AE2C7DF20D009E26A4 /* query.graphql in Resources */,
 				85D3061F2C5AC968008CB1B6 /* Preview Assets.xcassets in Resources */,
+				857F556B2C83AA8800F52563 /* subscriptions.graphql in Resources */,
 				855238A82C7DF151009E26A4 /* schema.graphqls in Resources */,
 				855238852C7B8C87009E26A4 /* SFProText-Regular.ttf in Resources */,
 				855238892C7B8C9F009E26A4 /* VT323-Regular.ttf in Resources */,
@@ -329,6 +339,7 @@
 				855238772C7B52C0009E26A4 /* Cache.swift in Sources */,
 				855238592C5FA620009E26A4 /* SetsView.swift in Sources */,
 				855238682C71181F009E26A4 /* CollectionView.swift in Sources */,
+				857F556F2C84C1EC00F52563 /* ChatViewModel.swift in Sources */,
 				855238972C7CA331009E26A4 /* PriceRangeGrid.swift in Sources */,
 				8552385B2C5FB04F009E26A4 /* SearchCardView.swift in Sources */,
 				855238662C710355009E26A4 /* DataUtils.swift in Sources */,
@@ -587,6 +598,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = ApolloAPI;
+		};
+		857F55682C83A18C00F52563 /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
 		};
 		85D9B1D22C7E34F2000F856D /* ChatAPI */ = {
 			isa = XCSwiftPackageProductDependency;

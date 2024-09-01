@@ -1,0 +1,10 @@
+subscription ChannelSubscription($id: ID!) {
+  messages(channelId: $id) {
+    content
+    user
+    date
+    id
+    user
+    channelId
+  }
+}

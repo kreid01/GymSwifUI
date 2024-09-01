@@ -13,12 +13,14 @@ public struct MessageInput: InputObject {
   public init(
     content: String,
     user: String,
-    date: String
+    date: String,
+    channelId: Int
   ) {
     __data = InputDict([
       "content": content,
       "user": user,
-      "date": date
+      "date": date,
+      "channelId": channelId
     ])
   }
 
@@ -35,5 +37,10 @@ public struct MessageInput: InputObject {
   public var date: String {
     get { __data["date"] }
     set { __data["date"] = newValue }
+  }
+
+  public var channelId: Int {
+    get { __data["channelId"] }
+    set { __data["channelId"] = newValue }
   }
 }

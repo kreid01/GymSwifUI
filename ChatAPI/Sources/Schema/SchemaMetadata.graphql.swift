@@ -20,8 +20,10 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
 
   public static func objectType(forTypename typename: String) -> ApolloAPI.Object? {
     switch typename {
-    case "Query": return ChatAPI.Objects.Query
+    case "Subscription": return ChatAPI.Objects.Subscription
     case "Message": return ChatAPI.Objects.Message
+    case "Query": return ChatAPI.Objects.Query
+    case "Channel": return ChatAPI.Objects.Channel
     case "Mutation": return ChatAPI.Objects.Mutation
     default: return nil
     }

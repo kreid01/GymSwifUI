@@ -7,3 +7,9 @@ mutation postMessage($input: MessageInput!) {
   }
 }
 
+mutation PostChannel($input: ChannelInput!) {
+  postChannel(input: $input) {
+    id
+    name
+  }
+}

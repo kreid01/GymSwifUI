@@ -2,118 +2,87 @@ import SwiftUI
 import Apollo
 import ChatAPI
 
-struct Message {
-    let content: String;
-    let date: String;
-    let user: String
-}
-
-
-class ChatViewModel : ObservableObject {
-    @Published var messages = [MessagesQuery.Data.Message]()
-    @Published var notificationMessage: String?
-    
-    
-    func sendMessage(content: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let currentDate = Date()
-        let dateString = dateFormatter.string(from: currentDate)
-        let input = MessageInput(content: content, user: "Me", date: dateString)
-        
-        Network.shared.apollo.perform(mutation: PostMessageMutation(input: input)) { [weak self]
-            result in guard self != nil else {
-                return
-            }
-            
-            switch result {
-            case .success(let graphQLResult):
-                if graphQLResult.data != nil {
-                    
-                   }
-
-                if graphQLResult.errors != nil {
-                       print("error")
-                   }
-            case .failure(_):
-                    print("failure")
-               }
-        }
-    }
-    
-    func loadMoreMessages() {
-        Network.shared.apollo.fetch(query: MessagesQuery()) { [weak self] result in guard let self = self else {
-                return
-            }
-
-            switch result {
-            case .success(let graphQLResult):
-                if let messageConnection = graphQLResult.data?.messages {
-                    self.messages.append(contentsOf: messageConnection.compactMap({ $0 }))
-                }
-                
-                if let errors = graphQLResult.errors {
-                    print(errors)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-}
-
-
-
 struct ChatView: View {
     @StateObject var viewModel = ChatViewModel()
     @State var message: String = ""
     @FocusState private var messageFieldIsFocused;
+    @State var page: Int = 1
     
     func sendMessage() {
         viewModel.sendMessage(content: message)
         message = ""
     }
     
+    @State private var isAtTop: Bool = false
+
+    
     var body : some View {
         NavigationStack {
             Text("Chats")
             VStack {
-                ScrollView{
-                    ForEach(0..<viewModel.messages.count, id: \.self) { index in
-                        let message = viewModel.messages[index]
+                ScrollView {
+                    VStack {
+                        GeometryReader { geo in
+                            Color.clear
+                                .onChange(of: geo.frame(in: .global).minY) { minY in
+                                    let threshold: CGFloat = 50 
+                                    self.isAtTop = minY >= threshold && self.viewModel.messages != []
+                                }
+                        }
+                        .frame(height: 0)}
+                    
+                    ForEach(viewModel.messages.reversed(), id: \.self) { message in
                         if message.user == "Me" {
                             HStack {
                                 Circle().frame(width: 40, height: 40).offset(x: 5, y: -35)
-                                VStack{
+                                    .foregroundStyle(.teal)
+                                VStack {
                                     HStack {
                                         Text(message.content).foregroundStyle(.white)
-                                        Text(message.date).foregroundStyle(.white)
-                                    }.frame(width: 250)
-                                        .frame(minHeight: 30)
-                                    Text(message.user).foregroundStyle(.white)
-                                        
-                                }.background(.blue)
+                                            .padding(5)
+                                        Spacer()
+                                    }
+                                    Text(message.date.prefix(10))
+                                        .foregroundStyle(.white.opacity(0.8))
+                                        .offset(x: 60, y: 0)
+                                    
+                                }.frame(width: 220)
+                                    .frame(minHeight: 60)
+                                    .background(.blue)
                                     .cornerRadius(4)
-                                    .frame(maxHeight: 60)
-                                    .position(x: 130, y: 0)
+                                    .position(x: 120, y: 0)
+                                    .padding(3)
                             }
                         } else {
                             HStack {
-                                VStack{
+                                VStack {
                                     HStack {
                                         Text(message.content).foregroundStyle(.white)
-                                        Text(message.date).foregroundStyle(.white)
-                                    }.frame(width: 250)
-                                        .frame(minHeight: 30)
-                                    Text(message.user).foregroundStyle(.white)
-                                }.background(.orange)
-                                    .cornerRadius(4)
-                                    .position(x: 210, y: 0)
+                                            .padding(5)
+                                        Spacer()
+                                    }
+                                    Text(message.date.prefix(10))
+                                        .foregroundStyle(.white.opacity(0.8))
+                                        .offset(x: 60, y: 0)
+                                    
+                                }.frame(width: 220)
                                     .frame(minHeight: 60)
-                                Circle().frame(width: 40, height: 40).offset(x: -10, y: -35)
+                                    .background(.orange)
+                                    .cornerRadius(4)
+                                    .position(x:230, y: 0)
+                                Circle().frame(width: 40, height: 40).offset(x: -5, y: -35)
+                                    .foregroundStyle(.teal)
                             }
                         }
-                    }.defaultScrollAnchor(.bottom)
+                    }
+                    .onChange(of: isAtTop) { atTop in
+                                    if atTop {
+                                        page += 1
+                                        viewModel.loadMoreMesssages(page: page )
+                                    }
+                                }
+                }.defaultScrollAnchor(.bottom)
+                    .padding([.bottom], 12)
                 }
             }
             HStack {
@@ -133,11 +102,12 @@ struct ChatView: View {
                     .frame(width: 100, height: 30)
             }.offset(x:0, y: -20)
             .task {
-                viewModel.loadMoreMessages()
+                viewModel.loadMoreMesssages(page: 1)
+                viewModel.startSubscription()
             }
         }
     }
-}
+
 
 #Preview {
     ChatView();

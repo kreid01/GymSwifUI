@@ -6,3 +6,15 @@ query Messages {
     date
   }
 }
+
+query GetChannel($id: ID!, $page: Int, $pageSize: Int) {
+  channel(id: $id, page: $page, pageSize: $pageSize) {
+    messages {
+      id
+      content
+      user
+      date
+      channelId
+    }
+  }
+}
