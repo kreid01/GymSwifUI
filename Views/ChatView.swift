@@ -15,75 +15,77 @@ struct ChatView: View {
     
     @State private var isAtTop: Bool = false
 
-    
     var body : some View {
         NavigationStack {
             Text("Chats")
             VStack {
-                ScrollView {
-                    VStack {
-                        GeometryReader { geo in
-                            Color.clear
-                                .onChange(of: geo.frame(in: .global).minY) { minY in
-                                    let threshold: CGFloat = 50 
-                                    self.isAtTop = minY >= threshold && self.viewModel.messages != []
+                ScrollViewReader { scrollProxy in
+                    ScrollView {
+                        VStack {
+                            GeometryReader { geo in
+                                Color.clear
+                                    .onChange(of: geo.frame(in: .global).minY) { minY in
+                                        let threshold: CGFloat = 50
+                                        self.isAtTop = minY >= threshold && self.viewModel.messages != []
+                                    }
+                            }
+                            .frame(height: 0)}
+                        ForEach(viewModel.messages.reversed(), id: \.self) { message in
+                            if message.user == "Me" {
+                                HStack {
+                                    Circle().frame(width: 40, height: 40).offset(x: 5, y: -35)
+                                        .foregroundStyle(.teal)
+                                    VStack {
+                                        HStack {
+                                            Text(message.content).foregroundStyle(.white)
+                                                .padding(5)
+                                            Spacer()
+                                        }
+                                        Text(message.date.prefix(10))
+                                            .foregroundStyle(.white.opacity(0.8))
+                                            .offset(x: 60, y: 0)
+                                        
+                                    }.frame(width: 220)
+                                        .frame(minHeight: 60)
+                                        .background(.blue)
+                                        .cornerRadius(4)
+                                        .position(x: 120, y: 0)
+                                        .padding(3)
                                 }
-                        }
-                        .frame(height: 0)}
-                    
-                    ForEach(viewModel.messages.reversed(), id: \.self) { message in
-                        if message.user == "Me" {
-                            HStack {
-                                Circle().frame(width: 40, height: 40).offset(x: 5, y: -35)
-                                    .foregroundStyle(.teal)
-                                VStack {
-                                    HStack {
-                                        Text(message.content).foregroundStyle(.white)
-                                            .padding(5)
-                                        Spacer()
-                                    }
-                                    Text(message.date.prefix(10))
-                                        .foregroundStyle(.white.opacity(0.8))
-                                        .offset(x: 60, y: 0)
-                                    
-                                }.frame(width: 220)
-                                    .frame(minHeight: 60)
-                                    .background(.blue)
-                                    .cornerRadius(4)
-                                    .position(x: 120, y: 0)
-                                    .padding(3)
+                            } else {
+                                HStack {
+                                    VStack {
+                                        HStack {
+                                            Text(message.content).foregroundStyle(.white)
+                                                .padding(5)
+                                            Spacer()
+                                        }
+                                        Text(message.date.prefix(10))
+                                            .foregroundStyle(.white.opacity(0.8))
+                                            .offset(x: 60, y: 0)
+                                        
+                                    }.frame(width: 220)
+                                        .frame(minHeight: 60)
+                                        .background(.orange)
+                                        .cornerRadius(4)
+                                        .position(x:230, y: 0)
+                                    Circle().frame(width: 40, height: 40).offset(x: -5, y: -35)
+                                        .foregroundStyle(.teal)
+                                }
                             }
-                        } else {
-                            HStack {
-                                VStack {
-                                    HStack {
-                                        Text(message.content).foregroundStyle(.white)
-                                            .padding(5)
-                                        Spacer()
+                        }.scrollTargetLayout()
+                        .onChange(of: isAtTop) { atTop in
+                            if atTop && viewModel.hasMoreMessage! {
+                                            page += 1
+                                            viewModel.loadMoreMesssages(page: page )
+                                        }
                                     }
-                                    Text(message.date.prefix(10))
-                                        .foregroundStyle(.white.opacity(0.8))
-                                        .offset(x: 60, y: 0)
-                                    
-                                }.frame(width: 220)
-                                    .frame(minHeight: 60)
-                                    .background(.orange)
-                                    .cornerRadius(4)
-                                    .position(x:230, y: 0)
-                                Circle().frame(width: 40, height: 40).offset(x: -5, y: -35)
-                                    .foregroundStyle(.teal)
-                            }
+                        .onChange(of: viewModel.messages.count) { count in
+                                scrollProxy.scrollTo(viewModel.messages[(page - 1) + 11])
                         }
+                    }.defaultScrollAnchor(.bottom)
+                        .padding([.bottom], 12)
                     }
-                    .onChange(of: isAtTop) { atTop in
-                                    if atTop {
-                                        page += 1
-                                        viewModel.loadMoreMesssages(page: page )
-                                    }
-                                }
-                }.defaultScrollAnchor(.bottom)
-                    .padding([.bottom], 12)
-                }
             }
             HStack {
                 TextField("message", text: $message)
@@ -107,6 +109,7 @@ struct ChatView: View {
             }
         }
     }
+}
 
 
 #Preview {

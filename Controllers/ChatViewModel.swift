@@ -3,10 +3,11 @@ import SwiftUI
 import ChatAPI
 
 class ChatViewModel : ObservableObject {
-    @Published var messages = [GetChannelQuery.Data.Channel.Message]()
+    @Published var messages = [GetChannelQuery.Data.Channel.Channel.Message]()
     @Published var notificationMessage: String?
     @Published var lastConnection:  MessagesQuery.Data.Message?
     @Published var activeRequest: Cancellable?
+    @Published var hasMoreMessage: Bool?
     var activeSubscription: Cancellable?
     
     func startSubscription() {
@@ -35,7 +36,7 @@ class ChatViewModel : ObservableObject {
         }
     }
     
-    func convertSubscriptionMessageToChannelMessage(_ subscriptionMessage: ChannelSubscription.Data.Message) -> GetChannelQuery.Data.Channel.Message? {
+    func convertSubscriptionMessageToChannelMessage(_ subscriptionMessage: ChannelSubscription.Data.Message) -> GetChannelQuery.Data.Channel.Channel.Message? {
         let data: [String: Any] = [
             "__typename": subscriptionMessage.__typename as Any,
             "id": subscriptionMessage.id,
@@ -45,7 +46,7 @@ class ChatViewModel : ObservableObject {
             "channelId": subscriptionMessage.channelId
         ]
         do {
-            return try GetChannelQuery.Data.Channel.Message(data: data)
+            return try GetChannelQuery.Data.Channel.Channel.Message(data: data)
         } catch {
             print(error)
         }
@@ -64,9 +65,9 @@ class ChatViewModel : ObservableObject {
 
                 switch result {
                 case .success(let graphQLResult):
-                    if let messages = graphQLResult.data?.channel.messages {
-                        print(page)
-                        self.messages.append(contentsOf: messages.compactMap({ $0 }))
+                    if let channelConnection = graphQLResult.data?.channel {
+                        self.messages.append(contentsOf: channelConnection.channel.messages.compactMap({ $0 }))
+                        self.hasMoreMessage = channelConnection.hasMore
                     }
 
                     if let errors = graphQLResult.errors {
@@ -109,10 +110,10 @@ class ChatViewModel : ObservableObject {
 
 }
 
-extension Array where Element == GetChannelQuery.Data.Channel.Message {
-    func removingDuplicatesById() -> [GetChannelQuery.Data.Channel.Message] {
+extension Array where Element == GetChannelQuery.Data.Channel.Channel.Message {
+    func removingDuplicatesById() -> [GetChannelQuery.Data.Channel.Channel.Message] {
         var seenIds = [String]()
-        var uniqueMessages = [GetChannelQuery.Data.Channel.Message ]()
+        var uniqueMessages = [GetChannelQuery.Data.Channel.Channel.Message ]()
         
         for message in self {
             if !seenIds.contains(message.id) {
