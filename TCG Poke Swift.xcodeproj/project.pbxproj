@@ -35,14 +35,16 @@
 		857F55692C83A18C00F52563 /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 857F55682C83A18C00F52563 /* ApolloWebSocket */; };
 		857F556B2C83AA8800F52563 /* subscriptions.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 857F556A2C83AA8800F52563 /* subscriptions.graphql */; };
 		857F556F2C84C1EC00F52563 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857F556E2C84C1EC00F52563 /* ChatViewModel.swift */; };
+		857F55712C863D9700F52563 /* ChatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857F55702C863D9700F52563 /* ChatsView.swift */; };
+		857F55732C863DA100F52563 /* ChatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857F55722C863DA100F52563 /* ChatsViewModel.swift */; };
 		85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306162C5AC966008CB1B6 /* TCG_Poke.swift */; };
 		85D306192C5AC966008CB1B6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306182C5AC966008CB1B6 /* ContentView.swift */; };
 		85D3061B2C5AC968008CB1B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061A2C5AC968008CB1B6 /* Assets.xcassets */; };
 		85D3061F2C5AC968008CB1B6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85D3061E2C5AC968008CB1B6 /* Preview Assets.xcassets */; };
 		85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D306412C5D8DEC008CB1B6 /* ViewModel.swift */; };
 		85D9B1CC2C7E30DA000F856D /* mutation.graphql in Resources */ = {isa = PBXBuildFile; fileRef = 85D9B1CB2C7E30DA000F856D /* mutation.graphql */; };
-		85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 85D9B1D22C7E34F2000F856D /* ChatAPI */; };
 		85D9B1D72C8327CB000F856D /* AsyncCacheImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85D9B1D62C8327CB000F856D /* AsyncCacheImage.swift */; };
+		85FE0BC72C877698002D4D26 /* ChatAPI in Frameworks */ = {isa = PBXBuildFile; productRef = 85FE0BC62C877698002D4D26 /* ChatAPI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +74,8 @@
 		855238C72C7E0534009E26A4 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		857F556A2C83AA8800F52563 /* subscriptions.graphql */ = {isa = PBXFileReference; lastKnownFileType = text; path = subscriptions.graphql; sourceTree = "<group>"; };
 		857F556E2C84C1EC00F52563 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
+		857F55702C863D9700F52563 /* ChatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsView.swift; sourceTree = "<group>"; };
+		857F55722C863DA100F52563 /* ChatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewModel.swift; sourceTree = "<group>"; };
 		85D306132C5AC966008CB1B6 /* TCG Poke Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TCG Poke Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85D306162C5AC966008CB1B6 /* TCG_Poke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCG_Poke.swift; sourceTree = "<group>"; };
 		85D306182C5AC966008CB1B6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,8 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85D9B1D32C7E34F2000F856D /* ChatAPI in Frameworks */,
 				857F55692C83A18C00F52563 /* ApolloWebSocket in Frameworks */,
+				85FE0BC72C877698002D4D26 /* ChatAPI in Frameworks */,
 				855238BA2C7DFFF7009E26A4 /* ApolloAPI in Frameworks */,
 				855238A52C7DF133009E26A4 /* Apollo in Frameworks */,
 			);
@@ -113,6 +117,7 @@
 			children = (
 				85D306412C5D8DEC008CB1B6 /* ViewModel.swift */,
 				857F556E2C84C1EC00F52563 /* ChatViewModel.swift */,
+				857F55722C863DA100F52563 /* ChatsViewModel.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				8552385F2C6E761A009E26A4 /* WishlistView.swift */,
 				855238672C71181F009E26A4 /* CollectionView.swift */,
 				855238A12C7DF01D009E26A4 /* ChatView.swift */,
+				857F55702C863D9700F52563 /* ChatsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -262,8 +268,8 @@
 			packageProductDependencies = (
 				855238A42C7DF133009E26A4 /* Apollo */,
 				855238B92C7DFFF7009E26A4 /* ApolloAPI */,
-				85D9B1D22C7E34F2000F856D /* ChatAPI */,
 				857F55682C83A18C00F52563 /* ApolloWebSocket */,
+				85FE0BC62C877698002D4D26 /* ChatAPI */,
 			);
 			productName = GymUI;
 			productReference = 85D306132C5AC966008CB1B6 /* TCG Poke Swift.app */;
@@ -345,12 +351,14 @@
 				855238662C710355009E26A4 /* DataUtils.swift in Sources */,
 				85D9B1D72C8327CB000F856D /* AsyncCacheImage.swift in Sources */,
 				8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */,
+				857F55732C863DA100F52563 /* ChatsViewModel.swift in Sources */,
 				855238952C7B978D009E26A4 /* SingleCard.swift in Sources */,
 				8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */,
 				8552389B2C7CA419009E26A4 /* CollectionValue.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
 				85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
+				857F55712C863D9700F52563 /* ChatsView.swift in Sources */,
 				850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */,
 				855238C82C7E0534009E26A4 /* Network.swift in Sources */,
 			);
@@ -604,9 +612,8 @@
 			package = 855238A32C7DF133009E26A4 /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = ApolloWebSocket;
 		};
-		85D9B1D22C7E34F2000F856D /* ChatAPI */ = {
+		85FE0BC62C877698002D4D26 /* ChatAPI */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 855238C42C7E04F3009E26A4 /* XCLocalSwiftPackageReference "ChatAPI" */;
 			productName = ChatAPI;
 		};
 /* End XCSwiftPackageProductDependency section */

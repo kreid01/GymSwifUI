@@ -3,10 +3,19 @@ import Apollo
 import ChatAPI
 
 struct ChatView: View {
-    @StateObject var viewModel = ChatViewModel()
     @State var message: String = ""
     @FocusState private var messageFieldIsFocused;
     @State var page: Int = 1
+    
+    @State private var _channelId: String;
+    @StateObject var viewModel: ChatViewModel;
+    
+
+    init(channelId: String) {
+        _channelId = channelId
+        _viewModel = StateObject(wrappedValue:  ChatViewModel(channelId: channelId))
+    }
+    
     
     func sendMessage() {
         viewModel.sendMessage(content: message)
@@ -16,7 +25,7 @@ struct ChatView: View {
     @State private var isAtTop: Bool = false
 
     var body : some View {
-        NavigationStack {
+        VStack {
             Text("Chats")
             VStack {
                 ScrollViewReader { scrollProxy in
@@ -81,7 +90,9 @@ struct ChatView: View {
                                         }
                                     }
                         .onChange(of: viewModel.messages.count) { count in
+                            if count > 11 {
                                 scrollProxy.scrollTo(viewModel.messages[(page - 1) + 11])
+                            }
                         }
                     }.defaultScrollAnchor(.bottom)
                         .padding([.bottom], 12)
@@ -111,7 +122,6 @@ struct ChatView: View {
     }
 }
 
-
 #Preview {
-    ChatView();
+    ContentView()
 }

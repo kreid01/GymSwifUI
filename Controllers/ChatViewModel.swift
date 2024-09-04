@@ -9,9 +9,14 @@ class ChatViewModel : ObservableObject {
     @Published var activeRequest: Cancellable?
     @Published var hasMoreMessage: Bool?
     var activeSubscription: Cancellable?
+    @State private var _channelId: String
+    
+    init(channelId: String) {
+        _channelId = channelId;
+    }
     
     func startSubscription() {
-        activeSubscription = Network.shared.apollo.subscribe(subscription: ChannelSubscription(id : "1")) { [weak self] result in
+        activeSubscription = Network.shared.apollo.subscribe(subscription: ChannelSubscription(id : _channelId)) { [weak self] result in
             guard let self = self else {
                 return
             }
@@ -56,7 +61,7 @@ class ChatViewModel : ObservableObject {
 
     
     func loadMoreMesssages(page: Int) {
-        self.activeRequest = Network.shared.apollo.fetch(query: GetChannelQuery(id: "1", page: GraphQLNullable<Int>(integerLiteral: page), pageSize: 20)) { [weak self] result in
+        self.activeRequest = Network.shared.apollo.fetch(query: GetChannelQuery(id: _channelId, page: GraphQLNullable<Int>(integerLiteral: page), pageSize: 20)) { [weak self] result in
                 guard let self = self else {
                     return
                 }
@@ -85,7 +90,7 @@ class ChatViewModel : ObservableObject {
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let currentDate = Date()
         let dateString = dateFormatter.string(from: currentDate)
-        let input = MessageInput(content: content, user: "Me", date: dateString, channelId: 1)
+        let input = MessageInput(content: content, user: "Me", date: dateString, channelId: Int(_channelId)!)
         
         Network.shared.apollo.perform(mutation: PostMessageMutation(input: input)) { [weak self]
             result in guard self != nil else {

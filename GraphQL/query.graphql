@@ -21,3 +21,10 @@ query GetChannel($id: ID!, $page: Int, $pageSize: Int) {
     hasMore
     }
 }
+
+query GetChannels {
+  channels {
+    name
+    id
+  }
+}

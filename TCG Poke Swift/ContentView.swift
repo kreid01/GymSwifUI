@@ -20,7 +20,7 @@ struct ContentView: View {
                              .tabItem {
                                  Label("Wishlist", systemImage: "list.star")
                              }
-                ChatView()
+                ChatsView()
                              .tabItem {
                                  Label("Chat", systemImage: "message")
                              }
