@@ -147,7 +147,9 @@ struct SingleCard : View {
                                             }
                                         }})
                                     .onChanged { value in
+                                        self.showPrices = false;
                                         if selected {
+                                            
                                             if value.translation.height > 0 {
                                                     withAnimation {
                                                         self.offsetY = 320 + value.translation.height
