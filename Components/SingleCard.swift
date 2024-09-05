@@ -19,7 +19,6 @@ struct SingleCard : View {
     
     @State private var prices: [PriceRangeDTO]?
     @State var showPrices = false;
-    @State var buttonOffsetX: CGFloat = -400
     
     private func updatePrices() {
             if let tcgPrices = card.tcgplayer?.prices {
@@ -56,10 +55,6 @@ struct SingleCard : View {
                             self.offsetX = 175
                             self.offsetY = 320
                         }
-                                        
-                        withAnimation(.easeInOut(duration: 0.5).delay(0.2))  {
-                            self.buttonOffsetX = 0
-                        }
                     } else {
                         showPrices = !showPrices
                     }
@@ -74,6 +69,23 @@ struct SingleCard : View {
                                 .frame(width: 400)
                                 .padding()
                         }
+                        if let image = card.set.images["logo"] {
+                            CacheAsyncImage(url: URL(string : image)!) {
+                                phase in
+                                switch phase {
+                                case .success(let image):
+                                    NavigationLink(destination: SetView(set: card.set), label: { image.resizable().scaledToFit()
+                                            .frame(width: 300)
+                                    })
+                                case .empty:
+                                    ProgressView()
+                                case .failure(_):
+                                    ProgressView()
+                                @unknown default:
+                                    fatalError()
+                                }
+                            }                         }
+
                     }})
                     .zIndex(2)
 
@@ -92,20 +104,17 @@ struct SingleCard : View {
                             .background(.yellow)
                             .foregroundColor(.black)
                             .cornerRadius(5)
-                            .offset(x: buttonOffsetX, y:0 )
                         Button("Add to collection") {
                             collectionRepository.AddToCollection(card: card)
                         }.frame(width: 350, height: 40)
                             .background(.yellow)
                             .foregroundColor(.black)
                             .cornerRadius(5)
-                            .offset(x: buttonOffsetX, y:0 )
                         Link("Buy", destination: URL(string: "https://magicmadhouse.co.uk/search.php?search_query=\(card.name)&productFilter=pokémon_set \(card.set.name)")!)
                             .frame(width: 350, height: 40)
                             .background(.yellow)
                             .foregroundColor(.black)
                             .cornerRadius(5)
-                            .offset(x: buttonOffsetX, y:0)
                     }.offset(x: 0, y: 10)
                 }
 
