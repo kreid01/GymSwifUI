@@ -15,50 +15,60 @@ struct ChatsView: View {
                         })
                     }
                     if self.creatingChannel == false {
-                        Button(action: {
-                            self.creatingChannel = !creatingChannel
-                        }, label: {
-                            Image(systemName: "plus")
-                                .font(.system(size: 32))
-                                .padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
-                                .background(.green)
-                                .foregroundColor(.white)
-                                .cornerRadius(2)
-                        }).offset(x: 130)
+                        HStack {
+                            Spacer()
+                            Button(action: {
+                                self.creatingChannel = !creatingChannel
+                            }, label: {
+                                Image(systemName: "plus")
+                                    .font(.system(size: 24))
+                                    .padding(/*@START_MENU_TOKEN@*/EdgeInsets()/*@END_MENU_TOKEN@*/)
+                                    .background(.green)
+                                    .foregroundColor(.white)
+                                    .cornerRadius(20)
+                            })
+                        }
                     }}.refreshable {
                         viewModel.loadChannels()
                     }.navigationBarTitle("Messages", displayMode: .inline)
                 
                 if self.creatingChannel == true {
                     VStack {
-                        Text("New Channel").padding([.bottom, .top], 5)
-                        TextField("name", text: $newChannelName)
-                            .textInputAutocapitalization(.never)
-                            .keyboardType(.asciiCapable)
-                            .padding()
-                            .border(.gray)
-                        HStack {
-                            Button(action: { viewModel.postChannel(name: newChannelName)
-                                self.creatingChannel = false
-                            }) {
-                                Text("Create")
-                                    .foregroundStyle(.white)
-                                    .frame(width: 150, height: 40)
-                            }.background(.blue)
-                                .padding(5)
-                            Button(action: {
-                                self.creatingChannel = false}) {
-                                Text("Cancel")
-                                    .foregroundStyle(.white)
-                                    .frame(width: 150, height: 40)
-                            }.background(.blue)
-                                .padding(5)
-                        }
-                    }.background(.white)
-                        .border(.gray)
-                        .padding(20)
-                        .cornerRadius(20)
-                        .offset(x:0, y:-50)
+                        Form {
+                            Text("Create Channel")
+                            TextField("Channel Name", text: $newChannelName)
+                                .textInputAutocapitalization(.never)
+                                .keyboardType(.asciiCapable)
+                                .padding()
+                                .border(.gray)
+                                .cornerRadius(2)
+
+                            HStack {
+                                Button(action: 
+                                        { 
+                                    if !newChannelName.isEmpty {
+                                        viewModel.postChannel(name: newChannelName)
+                                        self.creatingChannel = false
+                                    }
+                                }) {
+                                    Text("Create")
+                                        .foregroundStyle(.white)
+                                        .frame(width: 120, height: 35)
+                                        .cornerRadius(10)
+                                }.background(.blue)
+                                    .padding(5)
+                                Spacer()
+                                Button(action: {
+                                    self.creatingChannel = false}) {
+                                    Text("Cancel")
+                                        .foregroundStyle(.white)
+                                        .frame(width: 120, height: 35)
+                                        .cornerRadius(10)
+                                }.background(.blue)
+                                    .padding(5)
+                            }
+                        }.frame(height: .infinity)
+                    }
                 }}
             }
         .task {
