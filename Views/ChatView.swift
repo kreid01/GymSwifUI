@@ -10,20 +10,20 @@ struct ChatView: View {
     @State private var _channelId: String;
     @StateObject var viewModel: ChatViewModel;
     
-
     init(channelId: String) {
         _channelId = channelId
         _viewModel = StateObject(wrappedValue:  ChatViewModel(channelId: channelId))
     }
     
-    
     func sendMessage() {
-        viewModel.sendMessage(content: message)
-        message = ""
+        if !message.isEmpty {
+            viewModel.sendMessage(content: message)
+            message = ""
+        }
     }
     
     @State private var isAtTop: Bool = false
-
+    
     var body : some View {
         VStack {
             Text("Chats")
@@ -39,6 +39,8 @@ struct ChatView: View {
                                     }
                             }
                             .frame(height: 0)}
+                        
+                        Spacer(minLength: 700)
                         ForEach(viewModel.messages.reversed(), id: \.self) { message in
                             if message.user == "Me" {
                                 HStack {
@@ -66,13 +68,13 @@ struct ChatView: View {
                                         Text(message.date.prefix(10))
                                             .foregroundStyle(.white.opacity(0.8))
                                             .offset(x: 60, y: 0)
-                                        
-                                    }.frame(width: 220)
-                                        .frame(minHeight: 60)
-                                        .background(.blue)
-                                        .cornerRadius(4)
-                                        .position(x: 65, y: 0)
-                                        .padding(3)
+                                    }
+                                    .frame(width: 220)
+                                    .frame(minHeight: 60)
+                                    .background(.blue)
+                                    .cornerRadius(4)
+                                    .position(x: 65, y: 0)
+                                    .padding(3)
                                 }
                             } else {
                                 HStack {
@@ -85,12 +87,12 @@ struct ChatView: View {
                                         Text(message.date.prefix(10))
                                             .foregroundStyle(.white.opacity(0.8))
                                             .offset(x: 60, y: 0)
-                                        
-                                    }.frame(width: 220)
-                                        .frame(minHeight:60)
-                                        .background(.orange)
-                                        .cornerRadius(4)
-                                        .position(x:230, y: 0)
+                                    }
+                                    .frame(width: 220)
+                                    .frame(minHeight:60)
+                                    .background(.orange)
+                                    .cornerRadius(4)
+                                    .position(x:230, y: 0)
                                     CacheAsyncImage(url: URL(string : "https://e7.pngegg.com/pngimages/173/464/png-clipart-pokeball-pokeball-thumbnail.png")!) {
                                         phase in
                                         switch phase {
@@ -108,21 +110,26 @@ struct ChatView: View {
                                     }.frame(height: 50)
                                 }
                             }
-                        }.scrollTargetLayout()
+                        }
                         .onChange(of: isAtTop) { atTop in
                             if atTop && viewModel.hasMoreMessage! {
-                                            page += 1
-                                            viewModel.loadMoreMesssages(page: page )
-                                        }
-                                    }
-                        .onChange(of: viewModel.messages.count) { count in
-                            if count > 11 {
-                                scrollProxy.scrollTo(viewModel.messages[(page - 1) + 11])
+                                page += 1
+                                viewModel.loadMoreMesssages(page: page )
                             }
                         }
-                    }.defaultScrollAnchor(.bottom)
-                        .padding([.bottom], 12)
+                        .onChange(of: viewModel.messages.count) { count in
+                            if count > 1 {
+                                // Scroll to the last message when there are more than 1
+                                scrollProxy.scrollTo(viewModel.messages.last, anchor: .bottom)
+                            } else if count == 1 {
+                                // Scroll to the first message when there is only 1
+                                scrollProxy.scrollTo(viewModel.messages.first, anchor: .bottom)
+                            }
+                        }
                     }
+                    .defaultScrollAnchor(.bottom)
+                    .padding([.bottom], 12)
+                }
             }
             HStack {
                 TextField("message", text: $message)
@@ -130,16 +137,18 @@ struct ChatView: View {
                     .textInputAutocapitalization(.never)
                     .keyboardType(.asciiCapable)
                     .padding(10)
-                    .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    .offset(x: 10, y:0)
+                    .border(Color.black, width: 1)
+                    .offset(x: 10, y: 0)
                 Button(action: sendMessage, label: {
                     Text("Send")
                         .foregroundColor(.white)
-                }).padding(10)
-                    .background(.blue)
-                    .cornerRadius(2)
-                    .frame(width: 100, height: 30)
-            }.offset(x:0, y: -20)
+                })
+                .padding(10)
+                .background(.blue)
+                .cornerRadius(2)
+                .frame(width: 100, height: 30)
+            }
+            .offset(x: 0, y: -20)
             .task {
                 viewModel.loadMoreMesssages(page: 1)
                 viewModel.startSubscription()
@@ -149,5 +158,6 @@ struct ChatView: View {
 }
 
 #Preview {
-    ChatView(channelId: "1")
+    ChatView(channelId: "4")
 }
+
