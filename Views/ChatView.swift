@@ -42,8 +42,21 @@ struct ChatView: View {
                         ForEach(viewModel.messages.reversed(), id: \.self) { message in
                             if message.user == "Me" {
                                 HStack {
-                                    Circle().frame(width: 40, height: 40).offset(x: 5, y: -35)
-                                        .foregroundStyle(.teal)
+                                    CacheAsyncImage(url: URL(string : "https://e7.pngegg.com/pngimages/173/464/png-clipart-pokeball-pokeball-thumbnail.png")!) {
+                                        phase in
+                                        switch phase {
+                                            case .success(let image):
+                                                image.resizable().scaledToFit()
+                                                    .frame(width: 40, height:40)
+                                                    .offset(x: -15, y: -25)
+                                            case .empty:
+                                                ProgressView()
+                                            case .failure(_):
+                                                ProgressView()
+                                            @unknown default:
+                                                fatalError()
+                                        }
+                                    }.frame(height: 50)
                                     VStack {
                                         HStack {
                                             Text(message.content).foregroundStyle(.white)
@@ -58,7 +71,7 @@ struct ChatView: View {
                                         .frame(minHeight: 60)
                                         .background(.blue)
                                         .cornerRadius(4)
-                                        .position(x: 120, y: 0)
+                                        .position(x: 65, y: 0)
                                         .padding(3)
                                 }
                             } else {
@@ -74,12 +87,25 @@ struct ChatView: View {
                                             .offset(x: 60, y: 0)
                                         
                                     }.frame(width: 220)
-                                        .frame(minHeight: 60)
+                                        .frame(minHeight:60)
                                         .background(.orange)
                                         .cornerRadius(4)
                                         .position(x:230, y: 0)
-                                    Circle().frame(width: 40, height: 40).offset(x: -5, y: -35)
-                                        .foregroundStyle(.teal)
+                                    CacheAsyncImage(url: URL(string : "https://e7.pngegg.com/pngimages/173/464/png-clipart-pokeball-pokeball-thumbnail.png")!) {
+                                        phase in
+                                        switch phase {
+                                            case .success(let image):
+                                                image.resizable().scaledToFit()
+                                                    .frame(width: 40, height: 40)
+                                                    .offset(x: 25, y: -25)
+                                            case .empty:
+                                                ProgressView()
+                                            case .failure(_):
+                                                ProgressView()
+                                            @unknown default:
+                                                fatalError()
+                                        }
+                                    }.frame(height: 50)
                                 }
                             }
                         }.scrollTargetLayout()
@@ -123,5 +149,5 @@ struct ChatView: View {
 }
 
 #Preview {
-    ContentView()
+    ChatView(channelId: "1")
 }

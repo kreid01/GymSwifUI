@@ -32,45 +32,75 @@ struct SearchCardView: View {
     var subTypes = ["All Subtypes", "Mega", "VMax"]
     
     
+    @State var sort: Int = 0
+    private var sortOptions: [String] = ["None",  "Name (Ascending)", "Name (Descending)", "Type (Ascending)", "Type (Descending)", "Price (Ascending)", "Price (Descending)"]
+    
+    var sortedSearchResults: [Card] {
+        if searchText.isEmpty {
+            return sortCards(sort: sort, cards: searchResults)
+        } else {
+            return sortCards(sort: sort, cards: searchResults)
+        }
+    }
+
     var body: some View {
         NavigationStack {
-            HStack {
-                Picker(selection: $type, label: Text("Type")) {
-                    ForEach(Array(types.enumerated()), id: \.1) { index, item in
-                        Text(item).tag(index)
-                    }
-            }.onChange(of: type) { _ in
-                searchResults = []
-                search(page: page)
-            }
-                Picker(selection: $subType, label: Text("Sub Type")) {
-                    ForEach(Array(subTypes.enumerated()), id: \.1) { index, item in
-                        Text(item).tag(index)
-                    }
-                }.onChange(of: subType) { _ in
+            if !hideNavigationBar {
+            VStack {
+                HStack {
+                    Picker(selection: $type, label: Text("Type")) {
+                        ForEach(Array(types.enumerated()), id: \.1) { index, item in
+                            Text(item).tag(index)
+                        }
+                }.onChange(of: type) { _ in
                     searchResults = []
                     search(page: page)
                 }
-
-                Picker(selection: $generation, label: Text("Generation")) {
-                    ForEach(0...7, id: \.self) { i in
-                        if i == 0 {
-                           Text("All Gens")
+                    Picker(selection: $subType, label: Text("Sub Type")) {
+                        ForEach(Array(subTypes.enumerated()), id: \.1) { index, item in
+                            Text(item).tag(index)
                         }
-                        Text("Gen " + String(i + 1)).tag(i + 1)
+                    }.onChange(of: subType) { _ in
+                        searchResults = []
+                        search(page: page)
                     }
-                }.onChange(of: generation) { _ in
-                    searchResults = []
-            search(page: page)
-        }
-            }.frame(width: 1000)
+
+                    Picker(selection: $generation, label: Text("Generation")) {
+                        ForEach(0...7, id: \.self) { i in
+                            if i == 0 {
+                               Text("All Gens")
+                            }
+                            Text("Gen " + String(i + 1)).tag(i + 1)
+                        }
+                    }.onChange(of: generation) { _ in
+                        searchResults = []
+                search(page: page)
+            }
+                }.frame(width: 1000)
+                if searchResults.count > 0 {
+                    Menu {
+                        Picker(selection: $sort, label: Text("Sorting options")) {
+                            ForEach(Array(sortOptions.enumerated()), id: \.1) { index, item in
+                                Text(item).tag(index)
+                            }
+                        }
+                    } label: {
+                        Button(action: { print(sort)}) {
+                            Text("Sort by")
+                            Text(sortOptions[sort])
+                            Image(systemName: "arrow.up.arrow.down")
+                        }
+                    }
+                }
+                }
+            }
             ScrollView {
                 LazyVGrid(columns:layout) { ForEach(
-                    selectedCard != nil ? [selectedCard!] : searchResults, id: \.self) {
+                    selectedCard != nil ? [selectedCard!] : sortedSearchResults, id: \.self) {
                         card in
                         SingleCard(card: card, handler: selectCard)
                             .task{
-                            if card == searchResults.last {
+                            if card == sortedSearchResults.last {
                                 page += 1
                                 search(page: page)
                             }
@@ -115,8 +145,8 @@ struct SearchCardView: View {
         Task {
             let type = self.type == 0 ? "" : "types:\(self.types[type].lowercased()) "
             let subtype = self.subType == 0 ? "" : "subtypes:\(self.subTypes[subType].lowercased()) "
-            var generation = self.generation == 0 ? "" : pokedexRange(for: String(self.generation))
-            var search = searchText == "" ? "" : "name:\(searchText) "
+            let generation = self.generation == 0 ? "" : pokedexRange(for: String(self.generation))
+            let search = searchText == "" ? "" : "name:\(searchText) "
             
             guard let url = URL(string:
                                     "https://api.pokemontcg.io/v2/cards?q=\(search)\(type)\(subtype)\(generation)&pageSize=50&page=1")

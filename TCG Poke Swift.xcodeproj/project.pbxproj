@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		850F985D2C5D9D1900CB7B2A /* URLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985C2C5D9D1900CB7B2A /* URLImage.swift */; };
 		850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850F985E2C5DB15900CB7B2A /* SetView.swift */; };
+		8539BA042C8A23E0003BDE17 /* MenuUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8539BA032C8A23E0003BDE17 /* MenuUtil.swift */; };
 		8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384A2C5FA07E009E26A4 /* CardModels.swift */; };
 		8552384D2C5FA0A5009E26A4 /* SetModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8552384C2C5FA0A5009E26A4 /* SetModels.swift */; };
 		855238592C5FA620009E26A4 /* SetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 855238582C5FA620009E26A4 /* SetsView.swift */; };
@@ -50,6 +51,7 @@
 /* Begin PBXFileReference section */
 		850F985C2C5D9D1900CB7B2A /* URLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLImage.swift; sourceTree = "<group>"; };
 		850F985E2C5DB15900CB7B2A /* SetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetView.swift; sourceTree = "<group>"; };
+		8539BA032C8A23E0003BDE17 /* MenuUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuUtil.swift; sourceTree = "<group>"; };
 		8552384A2C5FA07E009E26A4 /* CardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardModels.swift; sourceTree = "<group>"; };
 		8552384C2C5FA0A5009E26A4 /* SetModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModels.swift; sourceTree = "<group>"; };
 		855238582C5FA620009E26A4 /* SetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetsView.swift; sourceTree = "<group>"; };
@@ -160,6 +162,7 @@
 				855238652C710355009E26A4 /* DataUtils.swift */,
 				855238982C7CA3A6009E26A4 /* CollectionValueUtils.swift */,
 				85D9B1D62C8327CB000F856D /* AsyncCacheImage.swift */,
+				8539BA032C8A23E0003BDE17 /* MenuUtil.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				855238952C7B978D009E26A4 /* SingleCard.swift in Sources */,
 				8552384B2C5FA07E009E26A4 /* CardModels.swift in Sources */,
 				8552389B2C7CA419009E26A4 /* CollectionValue.swift in Sources */,
+				8539BA042C8A23E0003BDE17 /* MenuUtil.swift in Sources */,
 				85D306422C5D8DEC008CB1B6 /* ViewModel.swift in Sources */,
 				85D306172C5AC966008CB1B6 /* TCG_Poke.swift in Sources */,
 				850F985F2C5DB15900CB7B2A /* SetView.swift in Sources */,
