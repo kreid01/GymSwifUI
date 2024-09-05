@@ -125,29 +125,34 @@ struct SingleCard : View {
             .frame(width: width,height: height).position(x: offsetX, y: offsetY)
             .gesture(
                                    DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                                    .onEnded({ value in
+                                        if selected {
+                                            if value.translation.height > 400 {
+                                                handler(nil)
+                                                selected = false
+                                                withAnimation {
+                                                    self.offsetY = 800
+                                                    self.height = defaultHeight;
+                                                    self.width = defaultWidth
+                                                }
+                
+                                                withAnimation(.spring(duration :0.3).delay(0.1)) {
+                                                    self.offsetY = 100
+                                                    self.offsetX = 50
+                                                }
+                                            } else {
+                                                withAnimation {
+                                                    self.offsetY = 320 
+                                                }
+                                            }
+                                        }})
                                     .onChanged { value in
                                         if selected {
                                             if value.translation.height > 0 {
-                                                if value.translation.height > 400 {
-                                                    print(value.translation.height)
-                                                    handler(nil)
-                                                    selected = false
-                                                    withAnimation {
-                                                        self.offsetY = 800
-                                                        self.height = defaultHeight;
-                                                        self.width = defaultWidth
-                                                    }
-
-                                                    withAnimation(.spring(duration :0.3).delay(0.1)) {
-                                                        self.offsetY = 100
-                                                        self.offsetX = 50
-                                                    }
-                                                } else {
                                                     withAnimation {
                                                         self.offsetY = 320 + value.translation.height
                                                     }
                                                 }
-                                        }
                                         }})
     }
 }

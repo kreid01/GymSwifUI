@@ -34,12 +34,14 @@ public struct WishlistView: View {
     public var body: some View {
         NavigationView {
             VStack {
-                Button(action: {
-                    self.isDeleting = !isDeleting
-                }, label: {
-                    Image(systemName: isDeleting ? "square.and.arrow.down" : "square.and.pencil")
-                        .font(.system(size: 28))
-                }).offset(x: 150, y: 0)
+                if !self.hideNavigationBar {
+                    Button(action: {
+                        self.isDeleting = !isDeleting
+                    }, label: {
+                        Image(systemName: isDeleting ? "square.and.arrow.down" : "square.and.pencil")
+                            .font(.system(size: 28))
+                    }).offset(x: 150, y: 0)
+                }
                 ScrollView {
                     LazyVGrid(columns: layout) {
                         ForEach(

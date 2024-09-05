@@ -40,20 +40,22 @@ public struct CollectionView : View {
     public var body :  some View {
         NavigationView {
             VStack {
-                HStack {
-                    Button(action: {
-                        self.isDeleting = !isDeleting
-                    }, label: {
-                        Image(systemName: isDeleting ? "square.and.arrow.down" : "square.and.pencil")
-                            .font(.system(size: 28))
+                if !self.hideNavigationBar {
+                    HStack {
+                        Button(action: {
+                            self.isDeleting = !isDeleting
+                        }, label: {
+                            Image(systemName: isDeleting ? "square.and.arrow.down" : "square.and.pencil")
+                                .font(.system(size: 28))
+                        })
+                        Button(action: {
+                            self.viewingTotals = !viewingTotals
+                        }, label: {
+                            Image(systemName: viewingTotals ? "eye.slash" : "eye")
+                                .font(.system(size: 28))
                     })
-                    Button(action: {
-                        self.viewingTotals = !viewingTotals
-                    }, label: {
-                        Image(systemName: viewingTotals ? "eye.slash" : "eye")
-                            .font(.system(size: 28))
-                })
-                }.offset(x: 130, y: 0)
+                    }.offset(x: 130, y: 0)
+                }
                 ZStack {
                     if viewingTotals {
                         if let estimatedTotals = collectionValue?.estimatedTotals
