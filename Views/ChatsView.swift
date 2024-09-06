@@ -1,4 +1,5 @@
 import SwiftUI
+import ChatAPI
 
 struct ChatsView: View {
     @StateObject var viewModel = ChatsViewModel()
@@ -11,7 +12,13 @@ struct ChatsView: View {
                 List {
                     ForEach(viewModel.channels, id: \.id) { channel in
                         NavigationLink(destination: ChatView(channelId: channel.id), label: {
-                            Text(channel.name ?? "Unnamed Channel")
+                            Text(channel.name ?? "Unnamed Channel").swipeActions(edge: .trailing) {
+                                Button(role: .destructive) {
+                                    var _ = viewModel.deleteChannel(id: channel.id)
+                                } label: {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                            }
                         })
                     }
                     if self.creatingChannel == false {

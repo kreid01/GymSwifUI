@@ -26,6 +26,26 @@ class ChatsViewModel : ObservableObject {
                 }
                 }
     }
+    func deleteChannel(id: String) {
+        Network.shared.apollo.perform(mutation: DeleteChannelMutation(id: id)) { [weak self] result in
+                guard let self = self else {
+                    return
+                }
+
+                switch result {
+                case .success(let graphQLResult):
+                    if let result = graphQLResult.data {
+                        print(result )
+                    }
+
+                    if let errors = graphQLResult.errors {
+                        print(errors)
+                    }
+                case .failure(let error):
+                    print(error)
+                }
+                }
+    }
     
     
     func postChannel(name: String) {

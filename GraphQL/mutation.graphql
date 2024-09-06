@@ -13,3 +13,7 @@ mutation PostChannel($input: ChannelInput!) {
     name
   }
 }
+
+mutation DeleteChannel($id: ID!) {
+  deleteChannel(id: $id)
+}

@@ -11,6 +11,7 @@ type Query {
 type Mutation {
     postMessage(input: MessageInput!): Message!
     postChannel(input: ChannelInput!): Channel!
+    deleteChannel(id: ID!): String
 }
 
 type Subscription {
