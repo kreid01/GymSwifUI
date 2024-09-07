@@ -44,18 +44,18 @@ class CollectionValueUtils {
             high: reverseHolofoilHigh,
             market: reverseHolofoilMarket
         )
-        
+
         let normalDTO = PriceRangeDTO(priceRange: normalPriceRange, priceName: "Normal")
 
         let holoDTO = PriceRangeDTO(priceRange: holofoilPriceRange, priceName: "Holofoil")
 
         let reverseDTO = PriceRangeDTO(priceRange: reverseHolofoilPriceRange, priceName: "Reverse Holo")
-        
-        return CollectionValue(normalPriceRange: normalDTO
-                               , holoPriceRange: holoDTO, reversePriceRange: reverseDTO)
+
+        return CollectionValue(normalPriceRange: normalDTO,
+                               holoPriceRange: holoDTO, reversePriceRange: reverseDTO)
     }
-    
+
     func getTotals(values: [Float?]) -> Float {
-        return values.reduce(0, { x, y in x + (y ?? 0) })
+        return values.reduce(0) { x, y in x + (y ?? 0) }
     }
 }

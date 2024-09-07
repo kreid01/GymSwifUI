@@ -1,12 +1,11 @@
 import SwiftUI
 
-
-public struct CollectionView : View {
-    var collectionRepository = CollectionRepository();
-    var collectionValueUtils = CollectionValueUtils();
+public struct CollectionView: View {
+    var collectionRepository = CollectionRepository()
+    var collectionValueUtils = CollectionValueUtils()
     
     @State var data: [Card] = []
-    @State var collectionValue:  CollectionValue?;
+    @State var collectionValue: CollectionValue?
     
     func refresh() {
         data = collectionRepository.GetCollectionPokemon()
@@ -26,18 +25,18 @@ public struct CollectionView : View {
     ]
     
     @State private var inProgress = false
-    @State private var isDeleting = false;
-    @State private var viewingTotals = false;
+    @State private var isDeleting = false
+    @State private var viewingTotals = false
     
     @State private var selectedCard: Card?
     
     @State private var hideNavigationBar = false
-       func selectCard(card: Card?) {
-           selectedCard = card;
-        hideNavigationBar = card != nil;
+    func selectCard(card: Card?) {
+        selectedCard = card
+        hideNavigationBar = card != nil
     }
 
-    public var body :  some View {
+    public var body: some View {
         NavigationView {
             VStack {
                 if !self.hideNavigationBar {
@@ -53,13 +52,12 @@ public struct CollectionView : View {
                         }, label: {
                             Image(systemName: viewingTotals ? "eye.slash" : "eye")
                                 .font(.system(size: 28))
-                    })
+                        })
                     }.offset(x: 130, y: 0)
                 }
                 ZStack {
                     if viewingTotals {
-                        if let estimatedTotals = collectionValue?.estimatedTotals
-                        {
+                        if let estimatedTotals = collectionValue?.estimatedTotals {
                             PriceRangeGrid(priceRanges: estimatedTotals)
                                 .zIndex(1.0)
                         }
@@ -68,23 +66,24 @@ public struct CollectionView : View {
                     VStack {
                         if !viewingTotals {
                             ScrollView {
-                                LazyVGrid(columns:layout) {  ForEach(
-                                    selectedCard != nil ? [selectedCard!] : data, id: \.self) { card in
-                                        ZStack {
-                                            SingleCard(card: card, handler: selectCard)
-                                                .opacity(isDeleting ? 0.3 : 1.0)
-                                            if isDeleting {
-                                                Button(action:{ removeFromCollection(id: card.id)}, label: {
-                                                    Image(systemName: "trash")
-                                                        .offset(x: -5, y:-20)
-                                                        .font(.system(size:32))
-                                                        .foregroundColor(.red)
-                                                        .padding()
+                                LazyVGrid(columns: layout) { ForEach(
+                                    selectedCard != nil ? [selectedCard!] : data, id: \.self)
+                                { card in
+                                    ZStack {
+                                        SingleCard(card: card, handler: selectCard)
+                                            .opacity(isDeleting ? 0.3 : 1.0)
+                                        if isDeleting {
+                                            Button(action: { removeFromCollection(id: card.id) }, label: {
+                                                Image(systemName: "trash")
+                                                    .offset(x: -5, y: -20)
+                                                    .font(.system(size: 32))
+                                                    .foregroundColor(.red)
+                                                    .padding()
                                                     
-                                                })
-                                            }
+                                            })
                                         }
                                     }
+                                }
                                 }
                             }
                             .offset(x: 0, y: 20)
@@ -96,9 +95,8 @@ public struct CollectionView : View {
                 }.refreshable {
                     refresh()
                 }.onAppear(perform: {
-                    refresh();
+                    refresh()
                 })
-                
             }
         }
     }
